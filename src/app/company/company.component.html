@@ -1,0 +1,134 @@
+<div class="section">
+
+    <section class="info-company">
+      <div class="container">
+      <div class="info-box w-100">
+        <div class="row w-100 mx-0">
+          <div class="col-2 d-flex flex-column align-items-center justify-content-center">
+            <picture class="user-profile">
+              <img [src]="company?.logotipo" [alt]="company?.fantasy_name">
+            </picture>
+          </div>
+          <div class="col-8 ">
+            <h1 class="mb-3 title-company">{{ company?.fantasy_name }}</h1>
+            <p class="mb-0">{{ company?.description }}</p>
+            <a mat-button target="_blank" [href]="'https://'+company?.website" class="mt-2">
+              <mat-icon class="mr-2">open_in_new </mat-icon> Abrir Site
+            </a>
+          </div>
+          <div class="col-2">
+            <div class="total-rate h-100">
+              <span class="mb-3 media">Média Geral</span>
+              <div class="d-flex flex-row align-items-center">
+                <h1 class="mb-0">{{ company?.media }}</h1><span class="material-icons ml-1" style="color: var(--yellow); font-size: 26px;">grade</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </section>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-8 pr-0">
+          <section class="company-rates">
+            <div class="d-flex flex-row align-items-center">
+              <h1 class="mb-0 mr-2">Avaliações</h1>
+              <span>({{total}} avaliações)</span>
+            </div>
+            <ul class="list-rates">
+              <li class="rate-item" *ngFor="let rate of rates; let i = index">
+                <div class="d-flex align-items-center justify-content-between">
+                  <div class="d-flex flex-column">
+                    <span class="user-name mb-0">{{ rate?.name ? rate?.name : 'Anônimo' }} </span>
+                    <div class="d-flex flex-row align-items-center" [innerHTML]="rateService.startsHTML(rate?.rate)"></div>
+                  </div>
+                  <span class="rate-time">{{ rate?.createdAt | date: 'dd/MM/yyyy' }}</span>
+                </div>
+                <div class="rate-body">
+                  <p class="comment my-3">{{ rate?.description }}</p>
+                  <div class="rate-actions">
+                    <button class="rate up" matRipple (click)="like(rate._id, i)">
+                      <mat-icon>thumb_up_alt</mat-icon>
+                      <span class="ml-2">{{ rate?.like }}</span>
+                    </button>
+                    <button class="rate bottom" matRipple (click)="deslike(rate._id, i)">
+                      <mat-icon>thumb_down_alt</mat-icon>
+                      <span class="ml-2">{{ rate?.deslike }}</span>
+                    </button>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <button mat-button (click)="getMoreRates()" *ngIf="rates.length != total" class="w-100" style="height: 45px">
+              <div class="d-flex flex-row align-items-center justify-content-center">
+                <mat-spinner diameter="27" class="mr-2" *ngIf="loadingRates"></mat-spinner>
+               {{ loadingRates ? 'Carregando...' : 'Carregar mais' }}
+              </div>
+            </button>
+          </section>
+        </div>
+        <div class="col-4">
+          <div class="about-company">
+            <div class="about-title">
+              <h1>Sobre</h1>
+            </div>
+            <div class="about-body" *ngIf="company?.category.length > 0">
+              <h3 style="font-size: 16px; font-weight: 500; ">Categorias</h3>
+              <mat-chip-list>
+              <mat-chip
+                *ngFor="let category of company.category">
+                {{category.type}}
+              </mat-chip>
+            </mat-chip-list>
+            </div>
+            <div class="about-body" *ngIf="company?.facebook || company?.linkedin || company?.instagram">
+              <h3 style="font-size: 16px; font-weight: 500; ">Social</h3>
+              <ul class="list-social">
+                <li>
+                  <a [href]="company?.facebook" target="_blank" matRipple class="d-flex flex-row align-items-center">
+                    <mat-icon class="mr-2">facebook</mat-icon> Facebook
+                  </a>
+                </li>
+                <li>
+                  <a [href]="company?.instagram" target="_blank" matRipple class="d-flex flex-row align-items-center">
+                    <svg id="Layer" class="mr-2" enable-background="new 0 0 64 64" height="24px" viewBox="0 0 64 64" width="24px"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="m42 8h-20c-7.72 0-14 6.28-14 14v20c0 7.72 6.28 14 14 14h20c7.72 0 14-6.28 14-14v-20c0-7.72-6.28-14-14-14zm10 34c0 5.514-4.486 10-10 10h-20c-5.514 0-10-4.486-10-10v-20c0-5.514 4.486-10 10-10h20c5.514 0 10 4.486 10 10z" />
+                      <path
+                        d="m32 21c-6.065 0-11 4.935-11 11s4.935 11 11 11 11-4.935 11-11-4.935-11-11-11zm0 18c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7z" />
+                      <path d="m45 16c-1.654 0-3 1.346-3 3s1.346 3 3 3 3-1.346 3-3-1.346-3-3-3z" /></svg>
+                    Instagram
+                  </a>
+                </li>
+                <li>
+                  <a [href]="company?.linkedin" target="_blank" matRipple class="d-flex flex-row align-items-center">
+                    <svg version="1.1" class="mr-2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                      width="24px" height="24px" viewBox="0 0 510 510" style="enable-background:new 0 0 510 510;" xml:space="preserve">
+                    <g>
+                      <g id="post-linkedin">
+                        <path d="M459,0H51C22.95,0,0,22.95,0,51v408c0,28.05,22.95,51,51,51h408c28.05,0,51-22.95,51-51V51C510,22.95,487.05,0,459,0z
+                          M153,433.5H76.5V204H153V433.5z M114.75,160.65c-25.5,0-45.9-20.4-45.9-45.9s20.4-45.9,45.9-45.9s45.9,20.4,45.9,45.9
+                          S140.25,160.65,114.75,160.65z M433.5,433.5H357V298.35c0-20.399-17.85-38.25-38.25-38.25s-38.25,17.851-38.25,38.25V433.5H204
+                          V204h76.5v30.6c12.75-20.4,40.8-35.7,63.75-35.7c48.45,0,89.25,40.8,89.25,89.25V433.5z"/>
+                      </g>
+                    </g>
+                    </svg>
+                    Linkedin
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="about-body" *ngIf="company?.place">
+              <h3 style="font-size: 16px; font-weight: 500; ">Endereço</h3>
+              <p class="mb-1">{{ company?.place.address }}, {{ company?.place.district }} - {{ company?.place.cep  | mask:'00000-000' }} </p>
+              <p><b>{{ company?.place.city }}</b> - {{ company?.place.uf }} </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
