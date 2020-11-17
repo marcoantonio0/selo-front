@@ -3,8 +3,36 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+h1, h2 {
+  font-family: "Mont", sans-serif !important;
+}
+
+
+.btn-primary {
+  background-color: #7920fa !important;
+  border-color: #7920fa !important;
+}
+
+header .nav {
+  font-family: "Mont", sans-serif !important;
+}
+
+a.nav-link {
+  color: #666 !important;
+  font-family: "Mont", sans-serif !important;
+  &:hover {
+    color: #7920fa !important;
+  }
+}
+
+a {
+   color: #7920fa !important;
+    text-decoration: none;
+    background-color: transparent;
+}
+
 .content {
-  padding-top: 57px;
+  padding-top: 65px;
 }
 
 .star {
@@ -17,3 +45,4 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
+@import 'assets/fonts/stylesheet.css';

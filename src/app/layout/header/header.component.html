@@ -1,49 +1,59 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-  <div class="container">
-    <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container">
+      <a class="navbar-brand" [routerLink]="['/']">
+        <img src="assets/logo.svg" alt="" style="height: 40px; width: auto;">
+      </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mx-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-    </ul>
-    <div class="d-flex flex-row align-items-center" *ngIf="!sAtuth.currentUserValue">
-      <a [routerLink]="'/login'">Entre</a>
-      <button [routerLink]="'/register'" class="btn btn-primary ml-3">
-        Cadastre-se
-      </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item active">
+          <a class="nav-link" [routerLink]="['/']">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+      </ul>
+      <div class="d-flex flex-row align-items-center" *ngIf="!sAtuth.currentUserValue">
+        <a mat-button [routerLink]="'/login'" style="text-decoration: none;" class="mr-2">
+          <span class="material-icons mr-2">
+            login
+            </span>
+             Entre
+        </a>
+        <button mat-flat-button color="primary" [routerLink]="'/register'" >
+          Cadastre-se
+        </button>
+      </div>
+      <div class="d-flex flex-row align-items-center" *ngIf="sAtuth.currentUserValue">
+        <button class="logged-button" [matMenuTriggerFor]="menu" >
+          <picture>
+            <img src="assets/default_profile.jpg" alt="">
+          </picture>
+          <span>
+            {{ sAtuth.currentUserValue.name }}
+          </span>
+        </button>
+        <mat-menu #menu="matMenu" xPosition="before">
+          <button mat-menu-item>
+            <mat-icon>person</mat-icon>
+            Minha Conta
+          </button>
+          <button mat-menu-item>
+            <mat-icon>settings</mat-icon>
+            Configurações
+          </button>
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>exit_to_app</mat-icon>
+            Sair
+          </button>
+        </mat-menu>
+      </div>
     </div>
-    <div class="d-flex flex-row align-items-center" *ngIf="sAtuth.currentUserValue">
-      <button class="logged-button" [matMenuTriggerFor]="menu" >
-        <picture>
-          <img src="assets/default_profile.jpg" alt="">
-        </picture>
-        <span>
-          {{ sAtuth.currentUserValue.name }}
-        </span>
-      </button>
-      <mat-menu #menu="matMenu" xPosition="before">
-        <button mat-menu-item>
-          <mat-icon>person</mat-icon>
-          Minha Conta
-        </button>
-        <button mat-menu-item>
-          <mat-icon>settings</mat-icon>
-          Configurações
-        </button>
-        <button mat-menu-item (click)="logout()">
-          <mat-icon>exit_to_app</mat-icon>
-          Sair
-        </button>
-      </mat-menu>
     </div>
-  </div>
-  </div>
-</nav>
+  </nav>
+
+</header>

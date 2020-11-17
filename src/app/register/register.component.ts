@@ -23,6 +23,7 @@ export class RegisterComponent implements OnInit {
     fantasy_name: new FormControl('', [Validators.required,  Validators.maxLength(255)]),
     website: new FormControl('', [Validators.required,  Validators.maxLength(255), Validators.pattern(/^((www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$/)]),
     company_name: new FormControl('', [Validators.required,  Validators.maxLength(255)]),
+    phone: new FormControl('', [Validators.required]),
     cnpj: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required,  Validators.minLength(6), Validators.maxLength(128)]),
     repeat_password: new FormControl('', [Validators.required,  Validators.minLength(6), Validators.maxLength(128)])

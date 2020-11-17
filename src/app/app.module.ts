@@ -1,3 +1,4 @@
+import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { IndexComponent } from './index/index.component';
 import { BrowserModule } from '@angular/platform-browser';
@@ -28,6 +29,7 @@ import { ErrorInterceptor } from './auth/error.interceptor';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    MatButtonModule,
     NgbModule,
     MatMenuModule,
     MatIconModule

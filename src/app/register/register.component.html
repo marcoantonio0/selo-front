@@ -31,23 +31,36 @@
                     <mat-error *ngIf="userForm.controls.email.invalid">{{ getError(userForm.controls.email) }}</mat-error>
                   </mat-form-field>
                 </p>
-                <p><mat-form-field appearance="outline" class="w-100">
-                  <mat-label>CNPJ</mat-label>
-                  <input matInput required formControlName="cnpj" autocomplete="cnpj" mask="00.000.000/0000-00" placeholder="00.000.000/0000-00">
-                  <mat-error *ngIf="userForm.controls.cnpj.invalid">{{ getError(userForm.controls.cnpj) }}</mat-error>
-                </mat-form-field></p>
-                <p>
+                <div class="row">
+                  <div class="col-6"><mat-form-field appearance="outline" class="w-100">
+                    <mat-label>CNPJ</mat-label>
+                    <input matInput required formControlName="cnpj" autocomplete="cnpj" mask="00.000.000/0000-00" placeholder="00.000.000/0000-00">
+                    <mat-error *ngIf="userForm.controls.cnpj.invalid">{{ getError(userForm.controls.cnpj) }}</mat-error>
+                  </mat-form-field></div>
+                  <div class="col-6">
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-label>Razão Social</mat-label>
+                      <input matInput formControlName="company_name" autocomplete="company_name" required>
+                      <mat-error *ngIf="userForm.controls.company_name.invalid">{{ getError(userForm.controls.company_name) }}</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-7">
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-label>Site</mat-label>
+                      <input matInput placeholder="Ex.: www.website.com.br" autocomplete="url" formControlName="website"  required>
+                      <mat-error *ngIf="userForm.controls.website.invalid">{{ getError(userForm.controls.website) }}</mat-error>
+                    </mat-form-field>
+                  </div>
+                 <div class="col-5">
                   <mat-form-field appearance="outline" class="w-100">
-                    <mat-label>Razão Social</mat-label>
-                    <input matInput formControlName="company_name" autocomplete="company_name" required>
-                    <mat-error *ngIf="userForm.controls.company_name.invalid">{{ getError(userForm.controls.company_name) }}</mat-error>
+                    <mat-label>Teleone/Celular</mat-label>
+                    <input matInput  autocomplete="phone" formControlName="phone" mask="(00) 0000-0000||(00) 0 0000-0000" required>
+                    <mat-error *ngIf="userForm.controls.phone.invalid">{{ getError(userForm.controls.phone) }}</mat-error>
                   </mat-form-field>
-                </p>
-                <mat-form-field appearance="outline" class="w-100">
-                  <mat-label>Site</mat-label>
-                  <input matInput placeholder="Ex.: www.website.com.br" autocomplete="url" formControlName="website"  required>
-                  <mat-error *ngIf="userForm.controls.website.invalid">{{ getError(userForm.controls.website) }}</mat-error>
-                </mat-form-field>
+                 </div>
+                </div>
                 <div class="row">
                   <div class="col-6">
                     <mat-form-field appearance="outline" class="w-100">
