@@ -1,5 +1,5 @@
 <header>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top d-flex flex-column">
     <div class="container">
       <a class="navbar-brand" [routerLink]="['/']">
         <img src="assets/logo.svg" alt="" style="height: 40px; width: auto;">
@@ -14,9 +14,20 @@
           <a class="nav-link" [routerLink]="['/']">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link" href="#">Sobre nós</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Consumidor</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Lojas</a>
         </li>
       </ul>
+      <button mat-icon-button  (click)="openSearch()">
+        <mat-icon>
+          {{ searchStatus ? 'close' : 'search' }}
+        </mat-icon>
+      </button>
       <div class="d-flex flex-row align-items-center" *ngIf="!sAtuth.currentUserValue">
         <a mat-button [routerLink]="'/login'" style="text-decoration: none;" class="mr-2">
           <span class="material-icons mr-2">
@@ -53,6 +64,14 @@
         </mat-menu>
       </div>
     </div>
+    </div>
+    <div class="container w-100" *ngIf="searchStatus">
+      <form [formGroup]="searchForm" class="form-inline  w-100 my-2 d-flex">
+        <input class="form-control" id="search" formControlName="search" type="text" placeholder="Pesquise por lojas :)" aria-label="Search">
+        <button class="search-button" type="submit" matRipple>
+          <mat-icon>search</mat-icon>
+        </button>
+      </form>
     </div>
   </nav>
 

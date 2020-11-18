@@ -11,7 +11,10 @@ const routes: Routes = [
     },
     { path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginModule) },
     { path: 'register', loadChildren: () => import('./register/register.module').then(m => m.RegisterModule) },
-    { path: 'company', loadChildren: () => import('./company/company.module').then(m => m.CompanyModule) }
+    { path: 'company', loadChildren: () => import('./company/company.module').then(m => m.CompanyModule) },
+    { path: 'forget-email', loadChildren: () => import('./forget-email/forget-email.module').then(m => m.ForgetEmailModule) },
+    { path: 'forget-password', loadChildren: () => import('./forget-password/forget-password.module').then(m => m.ForgetPasswordModule) },
+    { path: 'search', loadChildren: () => import('./search/search.module').then(m => m.SearchModule) },
   ]},
 ];
 

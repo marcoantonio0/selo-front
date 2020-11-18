@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,6 @@ import { Title } from '@angular/platform-browser';
 })
 export class AppComponent {
   constructor(private title: Title) {
-    this.title.setTitle('Compra Garantida');
+    this.title.setTitle(environment.pageTitle);
   }
 }

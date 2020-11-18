@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import { RegisterRoutingModule } from './register-routing.module';
 import { RegisterComponent } from './register.component';
@@ -31,7 +32,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     MatStepperModule,
     MatSelectModule,
     MatIconModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
+    MatSnackBarModule
   ]
 })
 export class RegisterModule { }

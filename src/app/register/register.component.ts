@@ -1,7 +1,12 @@
+import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
+import { AuthenticationService } from './../_services/authentication.service';
 import { UserService } from './../_services/user.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray, AbstractControl } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-register',
@@ -12,8 +17,13 @@ import { MatStepper } from '@angular/material/stepper';
 export class RegisterComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private snack: MatSnackBar,
+    private auth: AuthenticationService,
+    private route: Router,
+    private title: Title
   ) {
+    this.title.setTitle(`Cadastre-se | ${environment.pageTitle}`);
     this.getCep();
   }
   @ViewChild('stepper') stepper: MatStepper;
@@ -68,7 +78,7 @@ export class RegisterComponent implements OnInit {
     this.stepper.selectedIndex = index;
   }
 
-  public showError(error, type: 'warning'|'danger',  timeout = false, clear = false): void {
+  public alert(error, type: 'warning'|'danger'|'success',  timeout = false, clear = false): void {
     if(this.timeinterval){
       clearInterval(this.timeinterval);
     }
@@ -167,15 +177,22 @@ export class RegisterComponent implements OnInit {
       this.disabledAll();
       this.userService.create(this.getJson()).subscribe(r => {
         this.enableAll();
-        console.log(r);
+        this.alert(r.message, 'success', false, true);
+        setTimeout(() => {
+          this.auth.login(this.userForm.value.email, this.userForm.value.password).subscribe(r => {
+            this.snack.open('Login efeutado com sucesso.', 'OK', { duration: 1600 });
+            this.route.navigate(['/']);
+          }, e => {
+            this.route.navigate(['/']);
+          })
+        }, 1200);
       }, e => {
-        this.showError(e.error.message, 'danger', false, true);
+        this.alert(e, 'danger', false, true);
         this.enableAll();
-        console.log(e);
       });
     } else {
      this.move(this.validateForms().step);
-     this.showError(this.validateForms().message, 'warning', true);
+     this.alert(this.validateForms().message, 'warning', true);
     }
   }
 
@@ -246,6 +263,7 @@ export class RegisterComponent implements OnInit {
       fantasy_name: this.userForm.value.fantasy_name,
       website: this.userForm.value.website,
       company_name: this.userForm.value.company_name,
+      phone: this.userForm.value.phone,
       cnpj: this.userForm.value.cnpj,
       password: this.userForm.value.password,
       place: {

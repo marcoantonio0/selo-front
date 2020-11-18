@@ -1,5 +1,6 @@
 export const environment = {
-  production: false
+  production: false,
+  pageTitle: 'Compra Válida'
 };
 
 export const api = {

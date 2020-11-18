@@ -13,7 +13,7 @@
         </p>
         <div style="background: #fff; border-radius: 5px;  min-height: 450px;" class="p-2">
 
-          <mat-horizontal-stepper linear #stepper>
+          <mat-horizontal-stepper [linear]="false" #stepper>
             <mat-step [stepControl]="userForm"  [optional]="false">
               <form [formGroup]="userForm">
                 <ng-template matStepLabel>Informações da empresa</ng-template>

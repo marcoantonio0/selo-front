@@ -1,7 +1,9 @@
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from './../_services/authentication.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -23,8 +25,10 @@ export class LoginComponent implements OnInit {
   constructor(
     private sAuthentication: AuthenticationService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private title: Title
   ) {
+    this.title.setTitle(`Login | ${environment.pageTitle}`);
     this.reset();
   }
 

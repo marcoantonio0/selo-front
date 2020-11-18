@@ -4,19 +4,19 @@
       <div class="container">
       <div class="info-box w-100">
         <div class="row w-100 mx-0">
-          <div class="col-2 d-flex flex-column align-items-center justify-content-center">
+          <div class="col-12 col-xl-2 d-flex flex-column align-items-center justify-content-center">
             <picture class="user-profile">
               <img [src]="company?.logotipo" [alt]="company?.fantasy_name">
             </picture>
           </div>
-          <div class="col-8 ">
+          <div class="col-12 col-md-8 col-xl-8 my-3 my-xl-0">
             <h1 class="mb-3 title-company">{{ company?.fantasy_name }}</h1>
             <p class="mb-0">{{ company?.description }}</p>
             <a mat-button target="_blank" [href]="'https://'+company?.website" class="mt-2">
               <mat-icon class="mr-2">open_in_new </mat-icon> Abrir Site
             </a>
           </div>
-          <div class="col-2">
+          <div class="col-12 col-md-4 col-xl-2">
             <div class="total-rate h-100">
               <span class="mb-3 media">Média Geral</span>
               <div class="d-flex flex-row align-items-center">
@@ -31,7 +31,7 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-8 pr-0">
+        <div class="col-12 col-xl-8 pr-xl-0 mb-3 mb-xl-0">
           <section class="company-rates">
             <div class="d-flex flex-row align-items-center">
               <h1 class="mb-0 mr-2">Avaliações</h1>
@@ -69,7 +69,7 @@
             </button>
           </section>
         </div>
-        <div class="col-4">
+        <div class="col-12 col-xl-4">
           <div class="about-company">
             <div class="about-title">
               <h1>Sobre</h1>

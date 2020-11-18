@@ -1,5 +1,6 @@
 export const environment = {
-  production: true
+  production: false,
+  pageTitle: 'Compara Válida'
 };
 
 export const api = {

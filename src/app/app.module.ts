@@ -15,6 +15,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatMenuModule} from '@angular/material/menu';
 import { JwtInterceptor } from './auth/jwt.interceptor';
 import { ErrorInterceptor } from './auth/error.interceptor';
+import { MatRippleModule } from '@angular/material/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { ErrorInterceptor } from './auth/error.interceptor';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    MatRippleModule,
+    ReactiveFormsModule,
     MatButtonModule,
     NgbModule,
     MatMenuModule,
