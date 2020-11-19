@@ -45,6 +45,34 @@
   font-weight: 500;
 }
 
+.rate-actions[disabled]{
+  button {
+    color: #afafaf;
+    &.up.active {
+      color: #333;
+      .mat-icon {
+        color: var(--green) !important;
+      }
+    }
+    &.bottom.active {
+      color: #333;
+      .mat-icon {
+        color: var(--red) !important;
+      }
+    }
+    &.up {
+      .mat-icon {
+        color: #afafaf !important;
+      }
+    }
+    &.bottom {
+      .mat-icon {
+        color: #afafaf !important;
+      }
+    }
+  }
+}
+
 .list-rates {
   padding: 0;
   list-style: none;
@@ -100,12 +128,24 @@
           .mat-icon {
             color: var(--green);
           }
+          &:hover {
+            .mat-icon {
+              color: var(--green);
+            }
+          }
         }
+
         &.bottom {
           .mat-icon {
             color: var(--red);
           }
+          &:hover {
+            .mat-icon {
+              color: var(--red);
+            }
+          }
         }
+
         &:hover {
           background-color: #f3f3f3;
         }

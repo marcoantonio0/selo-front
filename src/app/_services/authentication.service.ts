@@ -40,7 +40,9 @@ export class AuthenticationService {
     }
 
     getSession(){
-      return this.http.get(`${api.url}/session`);
+      return this.http.get(`${api.url}/session`).pipe((map(session => {
+        localStorage.setItem('session', JSON.stringify(session));
+      })));
     }
 
 

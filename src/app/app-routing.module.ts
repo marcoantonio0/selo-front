@@ -1,3 +1,4 @@
+import { Error404Component } from './error404/error404.component';
 import { LayoutComponent } from './layout/layout.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -8,6 +9,10 @@ const routes: Routes = [
     {
       path: '',
       component: IndexComponent
+    },
+    {
+      path: '**',
+      component: Error404Component
     },
     { path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginModule) },
     { path: 'register', loadChildren: () => import('./register/register.module').then(m => m.RegisterModule) },

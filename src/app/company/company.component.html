@@ -48,20 +48,21 @@
                 </div>
                 <div class="rate-body">
                   <p class="comment my-3">{{ rate?.description }}</p>
-                  <div class="rate-actions">
-                    <button class="rate up" matRipple (click)="like(rate._id, i)">
-                      <mat-icon>thumb_up_alt</mat-icon>
-                      <span class="ml-2">{{ rate?.like }}</span>
-                    </button>
-                    <button class="rate bottom" matRipple (click)="deslike(rate._id, i)">
-                      <mat-icon>thumb_down_alt</mat-icon>
-                      <span class="ml-2">{{ rate?.deslike }}</span>
-                    </button>
-                  </div>
+                    <fieldset class="rate-actions" [disabled]="checkHasVoted(rate._id)">
+
+                      <button class="rate up" matRipple (click)="like(rate._id, i)" [ngClass]="{ 'active': checkVotes(rate._id, 'likes') }">
+                        <mat-icon>thumb_up_alt</mat-icon>
+                        <span class="ml-2">{{ rate?.like }}</span>
+                      </button>
+                      <button class="rate bottom" matRipple (click)="deslike(rate._id, i)" [ngClass]="{ 'active': checkVotes(rate._id, 'deslikes') }">
+                        <mat-icon>thumb_down_alt</mat-icon>
+                        <span class="ml-2">{{ rate?.deslike }}</span>
+                      </button>
+                    </fieldset>
                 </div>
               </li>
             </ul>
-            <button mat-button (click)="getMoreRates()" *ngIf="rates.length != total" class="w-100" style="height: 45px">
+            <button mat-button (click)="getMoreRates()" *ngIf="rates?.length != total" class="w-100" style="height: 45px">
               <div class="d-flex flex-row align-items-center justify-content-center">
                 <mat-spinner diameter="27" class="mr-2" *ngIf="loadingRates"></mat-spinner>
                {{ loadingRates ? 'Carregando...' : 'Carregar mais' }}

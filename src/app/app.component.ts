@@ -14,8 +14,6 @@ export class AppComponent {
     private sAuth: AuthenticationService
     ) {
     this.title.setTitle(environment.pageTitle);
-    this.sAuth.getSession().subscribe(r => {
-      console.log('Session!');
-    });
+    this.sAuth.getSession().subscribe();
   }
 }
