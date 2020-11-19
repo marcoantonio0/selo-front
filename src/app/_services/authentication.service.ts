@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { api } from 'src/environments/environment';
+import { isPlatformBrowser } from '@angular/common';
 
 
 @Injectable({ providedIn: 'root' })
@@ -10,7 +11,10 @@ export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<any>;
     public currentUser: Observable<any>;
 
-    constructor(private http: HttpClient) {
+    constructor(
+      private http: HttpClient,
+      @Inject(PLATFORM_ID) private platformId
+      ) {
         this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser')));
         this.currentUser = this.currentUserSubject.asObservable();
     }
@@ -29,9 +33,15 @@ export class AuthenticationService {
             }));
     }
 
-    logout() {
+    logout(): void {
         // remove user from local storage and set current user to null
         localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);
     }
+
+    getSession(){
+      return this.http.get(`${api.url}/session`);
+    }
+
+
 }
