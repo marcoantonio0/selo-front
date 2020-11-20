@@ -70,7 +70,6 @@ export class CompanyComponent implements OnInit {
     const indexDeslikes = this.session.deslikes.findIndex(x => x === _id);
     if(type == 'likes'){
       if(indexLikes >= 0){
-        console.log(true);
         return true;
       } else {
         return false;
