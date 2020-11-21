@@ -29,6 +29,7 @@ a.nav-link {
 
 .content {
   padding-top: 67px;
+  background-color: #eaedf1;
 }
 
 .star {
@@ -37,6 +38,12 @@ a.nav-link {
   &.active {
     color: var(--yellow);
   }
+}
+
+.menu-inner-wrapper{
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px;
 }
 
 /* Importing Bootstrap SCSS file. */

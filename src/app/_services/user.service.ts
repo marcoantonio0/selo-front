@@ -7,12 +7,13 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class UserService {
-
+  private register = api.url + 'user/register';
+  private user = api.url + '/user/';
+  private address = api.url + '/user/address/';
   constructor(private http: HttpClient) { }
 
   public create(json: any): Observable<any> {
-    console.log(api.url + 'user/register');
-    return this.http.post(api.url + '/user/register', json);
+    return this.http.post(this.register, json);
   }
 
   public cep(cep: string): Observable<any> {
@@ -20,7 +21,11 @@ export class UserService {
   }
 
   public getUser(id: any): Observable<any> {
-    return this.http.get(api.url + '/user/' + id);
+    return this.http.get(this.user + id);
+  }
+
+  public getAddress(id: any): Observable<any> {
+    return this.http.get(this.address + id);
   }
 
 }

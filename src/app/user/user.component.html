@@ -1,0 +1,70 @@
+<div class="section" style="background: #eaedf1;">
+  <div class="container h-100 py-4">
+    <div class="row">
+      <div class="col-4">
+        <div class="menu-container">
+          <div class="menu-wrapper pb-0">
+            <span class="menu-title">Configurações de conta</span>
+            <ul class="menu-user-list">
+              <li class="menu-item">
+                <a [routerLink]="['/user']" class="menu-link" [ngClass]="{ 'active': checkUrl('') }" matRipple>
+                  Minha conta
+                </a>
+              </li>
+              <li class="menu-item">
+                <a [routerLink]="['/user/website']" class="menu-link" matRipple [ngClass]="{ 'active': checkUrl('website') }">
+                  Meu site
+                </a>
+              </li>
+              <li class="menu-item">
+                <a [routerLink]="['/user/website']" class="menu-link" matRipple [ngClass]="{ 'active': checkUrl('website') }">
+                  Proprietários
+                </a>
+              </li>
+              <li class="menu-item">
+                <a [routerLink]="['/user/privacy']" class="menu-link" matRipple  [ngClass]="{ 'active': checkUrl('privacy') }">
+                  Privacidade e Segurança
+                </a>
+              </li>
+            </ul>
+            </div>
+            <hr>
+            <div class="menu-wrapper pb-0">
+              <span class="menu-title">Pagamentos</span>
+              <ul class="menu-user-list">
+                <li class="menu-item">
+                  <a [routerLink]="['/user','meu-site']" class="menu-link" matRipple>
+                    Minha assinatura
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a [routerLink]="['/user','meu-site']" class="menu-link" matRipple>
+                    Histórico de pagamentos
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a [routerLink]="['/user','meu-site']" class="menu-link" matRipple>
+                    Config. de Pagamentos
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <hr>
+            <div class="menu-wrapper">
+              <span class="menu-title">Suporte</span>
+              <ul class="menu-user-list">
+                <li class="menu-item">
+                  <a [routerLink]="['/user','meu-site']" class="menu-link" matRipple>
+                    Meus tickets
+                  </a>
+                </li>
+              </ul>
+            </div>
+        </div>
+      </div>
+      <div class="col-8">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>
