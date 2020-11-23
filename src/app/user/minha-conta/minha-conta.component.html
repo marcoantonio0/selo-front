@@ -8,7 +8,7 @@
       <div class="user-name">
         <h1>{{ sAuth.currentUserValue?.fantasy_name }}</h1>
         <span class="active-status">
-          <span class="status" [ngClass]="{ 'inactive': sAuth.currentUserValue.status == 0, 'inactive': sAuth.currentUserValue.status == 2, 'active': sAuth.currentUserValue.status == 1, 'banned': sAuth.currentUserValue.status == 2 }"></span>
+          <span class="status" [ngClass]="{ 'inactive': sAuth.currentUserValue.status == 0, 'active': sAuth.currentUserValue.status == 1, 'banned': sAuth.currentUserValue.status == 2 }"></span>
           <span *ngIf="sAuth.currentUserValue.status == 0">Analise</span>
           <span *ngIf="sAuth.currentUserValue.status == 1">Ativo</span>
           <span *ngIf="sAuth.currentUserValue.status == 2">Inativo</span>
