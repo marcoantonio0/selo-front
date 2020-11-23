@@ -1,0 +1,140 @@
+.ck-navbar {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  padding: 15px 0;
+  background-color: rgb(var(--navbar));
+}
+
+.list-step-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 15px 15px 10px;
+  font-size: 14px;
+}
+
+.list-step-wrapper .ls-progress {
+  width: 100%;
+  background-color: #eee;
+  overflow: hidden;
+  height: 5px;
+  display: block;
+}
+
+.list-step-wrapper .ls-steps {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: -20px;
+}
+
+.list-step-wrapper .ls-step {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  text-decoration: none;
+}
+
+.list-step-wrapper .ls-step .fill {
+  height: 15px;
+  width: 15px;
+  background-color: #eee;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-items: center;
+  text-align: center;
+}
+
+.list-step-wrapper .ls-step .ls-text {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  display: flex;
+  width: 95px;
+}
+
+.list-step-wrapper .ls-step .ls-text {
+  color: #666;
+  top: 45px;
+}
+
+.list-step-wrapper .ls-step.active .ls-text {
+  color: #7920fa;
+  top: 45px;
+}
+
+.list-step-wrapper .ls-progressbar {
+  background-color: #7920fa;
+  display: block;
+  height: 100%;
+}
+
+.list-step-wrapper .ls-step.active .fill {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  background-color: #fff!important;
+  border: 2px solid #7920fa;
+  color: #7920fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .material-icons {
+    font-size: 18px;
+  }
+}
+
+.ck-body {
+  min-height: 90vh;
+  background-color: #eaedf1;
+}
+
+.ck-box {
+  background-color: #fff;
+  border-radius: 5px;
+  .ck-header {
+    padding: 10px 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 45px;
+    .ck-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #333;
+    }
+  }
+  .ck-box-body{
+    padding: 15px;
+    .ck-plan-title {
+      font-weight: 500;
+      color: #333;
+      font-size: 14px;
+    }
+    .ck-plan-price {
+      font-size: 16px;
+      color: var(--green);
+      font-weight: 500;
+    }
+    .ck-total {
+      font-size: 16px;
+      color: #333;
+      font-weight: 500;
+    }
+  }
+}
+
+.payment-button {
+  height: 45px;
+  width: 100%;
+  background-color: var(--green);
+  color: #fff;
+}

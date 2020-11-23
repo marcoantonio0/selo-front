@@ -1,0 +1,18 @@
+.owner-row {
+  border-radius: 5px;
+  border: 1px solid #eee;
+  .owner-header {
+    background-color: #f3f3f3;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .owner-body{
+    padding: 1rem;
+  }
+  .remove-owner {
+    color: #fff;
+    background: var(--red);
+  }
+}

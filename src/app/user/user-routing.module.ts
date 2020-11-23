@@ -1,3 +1,4 @@
+import { OwnersComponent } from './owners/owners.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { MeuSiteComponent } from './meu-site/meu-site.component';
 import { MinhaContaComponent } from './minha-conta/minha-conta.component';
@@ -10,7 +11,8 @@ const routes: Routes = [
   { path: '', component: UserComponent, children: [
     { path: '', component: MinhaContaComponent },
     { path: 'website', component: MeuSiteComponent },
-    { path: 'privacy', component: PrivacyComponent }
+    { path: 'privacy', component: PrivacyComponent },
+    { path: 'owners', component: OwnersComponent }
   ] }
   ];
 

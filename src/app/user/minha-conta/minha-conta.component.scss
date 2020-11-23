@@ -1,67 +1,39 @@
-.user-infos {
-  background-color: #f3f3f3;
-  border-radius: 5px;
-  padding: 1rem;
+.form-control {
+  height: 45px;
 }
 
-.username-wrapper {
-  .user-picture {
-    height: 90px;
-    width: 90px;
-    max-width: 90px;
-    max-height: 90px;
-    overflow: hidden;
-    background-color: #fff;
-    border-radius: 50%;
-    margin-right: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
-    img {
-      width: 100%;
-      height: auto;
-    }
-  }
-  display: flex;
+.form-control:focus {
+  color: #333;
+  background-color: #fff;
+  border-color: #7920fa !important;
+  outline: 0;
+  box-shadow: none;
+}
+
+.active-status {
+  padding: 8px;
+  height: 30px;
+  display: inline-flex;
   align-items: center;
   flex-direction: row;
-}
-
-.info-title {
-  font-size: 16px;
+  text-align: center;
+  background: #d6dbe0;
+  border-radius: 5rem;
   font-weight: 600;
-  color: #666;
-  text-transform: uppercase;
-}
-
-.info-text {
-  color: #666;
-  font-size: 14px;
-}
-
-.edit-areas {
-  background-color: #fff;
-  border-radius: 5px;
-  padding: 1.2rem;
-}
-
-.edit-area {
-  display: flex;
-  flex-direction: column;
-  .edit-label {
-    font-size: 12px;
-    text-transform: uppercase;
-    color: #666;
-    font-weight: 600;
-  }
-  margin-top: 1rem;
-  .edit-area-input {
-    height: 45px;
-    display: flex;
-    align-items: center;
-    width: 100%;
+  .status{
+    height: 10px;
+    width: 10px;
+    margin-right: .35rem;
+    background-color: #333;
+    border-radius: 50%;
+    &.active{
+      background-color: var(--green);
+    }
+    &.banned{
+      background-color: var(--red);
+    }
+    &.inactive{
+      background-color: var(--gray);
+    }
   }
 }
-
-

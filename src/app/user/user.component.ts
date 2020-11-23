@@ -1,3 +1,4 @@
+import { AuthenticationService } from './../_services/authentication.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,7 +10,8 @@ import { Component, OnInit } from '@angular/core';
 export class UserComponent implements OnInit {
   private url: string;
   constructor(
-    private route: Router
+    private route: Router,
+    public sAuth: AuthenticationService
   ) {
     this.route.events.subscribe((val) => {
       // see also

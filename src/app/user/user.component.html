@@ -17,7 +17,7 @@
                 </a>
               </li>
               <li class="menu-item">
-                <a [routerLink]="['/user/website']" class="menu-link" matRipple [ngClass]="{ 'active': checkUrl('website') }">
+                <a [routerLink]="['/user/owners']" class="menu-link" matRipple [ngClass]="{ 'active': checkUrl('owners') }">
                   Proprietários
                 </a>
               </li>
@@ -51,8 +51,13 @@
             </div>
             <hr>
             <div class="menu-wrapper">
-              <span class="menu-title">Suporte</span>
+              <span class="menu-title">Ajuda</span>
               <ul class="menu-user-list">
+                <li class="menu-item">
+                  <a [routerLink]="['/user','meu-site']" class="menu-link" matRipple>
+                    Inserção de selo
+                  </a>
+                </li>
                 <li class="menu-item">
                   <a [routerLink]="['/user','meu-site']" class="menu-link" matRipple>
                     Meus tickets
@@ -63,6 +68,16 @@
         </div>
       </div>
       <div class="col-8">
+        <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="sAuth.currentUserValue.email_status != true">
+          <mat-icon class="mr-2">report_problem</mat-icon>
+          Sua conta ainda não foi validada. Verifique seu e-mail para valida-la.
+        </div>
+
+        <div class="alert alert-info alert-dismissible fade show" role="alert" *ngIf="sAuth.currentUserValue.status == 0">
+          <mat-icon class="mr-2">notification_important</mat-icon>
+          Sua conta ainda está em processo de análise. Seu selo só será ativo quando sua conta for aprovada.
+        </div>
+
         <router-outlet></router-outlet>
       </div>
     </div>

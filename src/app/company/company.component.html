@@ -6,7 +6,8 @@
         <div class="row w-100 mx-0">
           <div class="col-12 col-xl-2 d-flex flex-column align-items-center justify-content-center">
             <picture class="user-profile">
-              <img [src]="company?.logotipo" [alt]="company?.fantasy_name">
+              <img [src]="company?.logotipo" [alt]="company?.fantasy_name" *ngIf="company?.logotipo">
+              <img src="assets/default_profile.jpg" [alt]="company?.fantasy_name" *ngIf="!company?.logotipo">
             </picture>
           </div>
           <div class="col-12 col-md-8 col-xl-8 my-3 my-xl-0">
@@ -37,7 +38,7 @@
               <h1 class="mb-0 mr-2">Avaliações</h1>
               <span>({{total}} avaliações)</span>
             </div>
-            <ul class="list-rates" *ngIf="rates.length > 0">
+            <ul class="list-rates" *ngIf="rates?.length > 0">
               <li class="rate-item" *ngFor="let rate of rates; let i = index">
                 <div class="d-flex align-items-center justify-content-between">
                   <div class="d-flex flex-column">
@@ -140,7 +141,7 @@
           </div>
         </div>
       </div>
-      <div class="d-flex flex-colum align-items-center justify-content-center" style="min-height: 20vh;" *ngIf="rates?.length <= 0">
+      <div class="d-flex flex-colum align-items-center justify-content-center" style="min-height: 20vh;" *ngIf="company?.length <= 0">
         <h2>Não encontramos nenhuma empresa.</h2>
       </div>
     </div>

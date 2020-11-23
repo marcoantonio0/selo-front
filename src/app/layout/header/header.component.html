@@ -20,14 +20,10 @@
           <a class="nav-link" href="#">Consumidor</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Lojas</a>
+          <a class="nav-link" [routerLink]="['/stores']">Lojas</a>
         </li>
       </ul>
-<<<<<<< Updated upstream
       <button mat-icon-button  (click)="openSearch()" class="search-button">
-=======
-      <button mat-icon-button  (click)="openSearch()" class="mr-2">
->>>>>>> Stashed changes
         <mat-icon>
           {{ searchStatus ? 'close' : 'search' }}
         </mat-icon>

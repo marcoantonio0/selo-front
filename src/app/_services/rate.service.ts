@@ -59,11 +59,11 @@ export class RateService {
   }
 
   public startsHTML(stars: number) {
-    const totalStars = 5 - stars;
-    const startActive  = '<span class="material-icons star active">grade</span>';
-    const startInactive  = '<span class="material-icons star">grade</span>';
+    const totalStars = 5 - parseInt(stars.toFixed(0));
+    const startActive  = '<span class="material-icons star active">star</span>';
+    const startInactive  = '<span class="material-icons star">star</span>';
     let starts = '';
-    for (let index = 0; index < stars; index++) {
+    for (let index = 0; index < parseInt(stars.toFixed(0)); index++) {
       starts += startActive;
     }
     for (let index = 0; index < totalStars; index++) {

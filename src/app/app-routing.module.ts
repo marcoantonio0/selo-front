@@ -18,12 +18,13 @@ const routes: Routes = [
     { path: 'forget-password', loadChildren: () => import('./forget-password/forget-password.module').then(m => m.ForgetPasswordModule) },
     { path: 'search', loadChildren: () => import('./search/search.module').then(m => m.SearchModule) },
     { path: 'user', canActivate: [AuthGuard],  loadChildren: () => import('./user/user.module').then(m => m.UserModule) },
-    {
-      path: '**',
-      component: Error404Component
-    },
+    { path: 'stores', loadChildren: () => import('./stores/stores.module').then(m => m.StoresModule) },
   ]},
-
+  { path: 'checkout', loadChildren: () => import('./checkout/checkout.module').then(m => m.CheckoutModule) },
+  {
+    path: '**',
+    component: Error404Component
+  }
 ];
 
 @NgModule({
