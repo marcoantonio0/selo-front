@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from './../../_services/authentication.service';
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
@@ -15,7 +16,8 @@ export class HeaderComponent implements OnInit {
   });
   constructor(
     public sAtuth: AuthenticationService,
-    @Inject(PLATFORM_ID) private platformId
+    @Inject(PLATFORM_ID) private platformId,
+    private route: Router
   ) { }
 
   ngOnInit(): void {
@@ -36,6 +38,7 @@ export class HeaderComponent implements OnInit {
 
   logout(){
     this.sAtuth.logout();
+    this.route.navigate(['/']);
   }
 
 }

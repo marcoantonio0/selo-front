@@ -1,0 +1,79 @@
+<div class="section" >
+  <div class="container h-100 py-3" style="min-height: 90vh;">
+    <div class="row">
+      <div class="col-12 col-xl-3">
+        <h1>Lojas</h1>
+        <div class="pt-2 pb-3" *ngIf="getFiltersCategory() || getFiltersRate()">
+          <h4 style="font-size: 14px; color: #666; font-weight: 600; text-transform: uppercase;">Filtros</h4>
+          <mat-chip-list #chipList aria-label="Fruit selection" >
+            <mat-chip [removable]="true" *ngFor="let category of getFiltersCategory()" (removed)="setFilter('c', category._id)">
+              {{ category.type }}
+              <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+            <mat-chip [removable]="true" *ngFor="let rate of getFiltersRate()" (removed)="removeMedia()">
+              <span [innerHTML]="sRate.startsHTML(rate)"></span>
+              <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+          </mat-chip-list>
+        </div>
+        <div class="filter-wrapper mb-3 mb-xl-0">
+          <span class="filter-title">Categoria</span>
+          <ul class="filter-list pt-0">
+            <li matRipple *ngFor="let category of categories" [ngClass]="{'active': checkActiveCategory(category._id) }" (click)="setFilter('c', category._id)">
+              <mat-icon>
+                {{ checkActiveCategory(category._id) ? 'check_box' : 'check_box_outline_blank' }}
+              </mat-icon>
+              {{ category.type }}
+            </li>
+          </ul>
+          <hr>
+          <span class="filter-title">Media Avaliações</span>
+          <ul class="filter-list pt-0">
+            <li matRipple *ngFor="let rate of rates" (click)="setFilter('m', rate)" [ngClass]="{'active': checkActiveMedia(rate)}">
+              <mat-icon>
+                {{ checkActiveMedia(rate) ? 'check_box' : 'check_box_outline_blank' }}
+              </mat-icon>
+              <span [innerHTML]="sRate.startsHTML(rate)"></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-12 col-xl-9 px-xl-0">
+        <div class="list-stores">
+          <a class="store-card" matRipple *ngFor="let store of stores" [routerLink]="['/company',store.id]">
+            <picture class="store-picture">
+              <img [src]="store?.logotipo" [alt]="store?.fantasy_name" *ngIf="store?.logotipo">
+              <img src="assets/default_profile.jpg" [alt]="store?.fantasy_name" *ngIf="!store?.logotipo">
+            </picture>
+            <div class="d-flex flex-column align-items-center justify-content-center">
+              <span class="store-title">{{ store?.fantasy_name }}</span>
+              <div class="rate">
+                <span>{{ store?.media }}</span>
+                <mat-icon>star</mat-icon>
+              </div>
+            </div>
+          </a>
+        </div>
+        <nav class="d-flex flex-row align-items-center justify-content-center mt-3">
+          <ul class="pagination">
+            <li class="page-item" [ngClass]="{ 'disabled': this.page == 1 }" >
+              <button class="page-link" href="#" aria-label="Previous" (click)="previousPage()">
+                <mat-icon> navigate_before</mat-icon>
+                <span class="sr-only">Previous</span>
+              </button>
+            </li>
+            <li class="page-item" *ngFor="let page of pages" [ngClass]="{'active': this.filters.p == page }"><button  (click)="pageChanged(page)" class="page-link" >{{ page }}</button></li>
+            <li class="page-item" [ngClass]="{ 'disabled': this.page == pages.length }" >
+              <button class="page-link" href="#" aria-label="Next" (click)="nextPage()">
+                <span aria-hidden="true">
+                  <mat-icon>navigate_next</mat-icon>
+                </span>
+                <span class="sr-only">Next</span>
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>

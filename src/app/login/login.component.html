@@ -1,31 +1,35 @@
-<div class="section" style="background: #f3f3f3;">
+<div class="section" style="background: #eaedf1;">
   <div class="container h-100">
     <div class="d-flex flex-row align-items-center justify-content-center h-100" style="min-height: 90vh;">
       <div style="max-width: 368px; min-width: 368px" class="p-3">
         <h1 class="display-4">Bem-vindo!</h1>
         <span>Faça seu login para continuar.</span>
-        <p *ngFor="let alert of alerts; let i = index">
+        <div *ngFor="let alert of alerts; let i = index" class="mt-2">
           <ngb-alert  [type]="alert.type" (closed)="close(i)" [dismissible]="true">
             {{ alert.error }}
           </ngb-alert>
-        </p>
+        </div>
         <form [formGroup]="loginForm" (ngSubmit)="loginSubmit()" class="my-3 p-3" style=" background-color: #fff; border-radius: 5px;">
-          <p>
+          <p class="mb-0">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>E-mail</mat-label>
               <input type="email" matInput formControlName="email">
               <mat-icon matPrefix style="color: #666;">person</mat-icon>
-              <mat-hint><a [routerLink]="['/forget-email']">Esqueci meu e-mail</a></mat-hint>
             </mat-form-field>
           </p>
-          <p>
+          <div class="text-right mb-2">
+            <a [routerLink]="['/forget-email']" ><small>Esqueci meu e-mail</small></a>
+          </div>
+          <p class="mb-0">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Senha</mat-label>
               <input type="password" matInput formControlName="password">
               <mat-icon matPrefix style="color: #666;"> lock</mat-icon>
-              <mat-hint><a [routerLink]="['/forget-password']">Esqueci minha senha</a></mat-hint>
             </mat-form-field>
           </p>
+          <div class="text-right mb-2">
+            <a  [routerLink]="['/forget-password']" ><small>Esqueci minha senha</small></a>
+          </div>
           <button mat-flat-button color="primary" type="submit" class="w-100" style="height: 50px;" [disabled]="disabled">
             {{ isLoading ? '' : 'Entrar'}}
             <mat-spinner diameter="28" *ngIf="isLoading" class="m-auto"></mat-spinner>

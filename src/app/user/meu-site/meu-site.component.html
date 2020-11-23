@@ -1,0 +1,57 @@
+<div class="menu-inner-wrapper p-3">
+  <div class="flex-row flex-column p-3">
+    <span class="info-title">Descrição</span>
+    <p class="info-text">Descreva seu site em até 240 caracteres. Esta descrição irá aparecer para todos os usuários.</p>
+    <p *ngFor="let alert of alertsDescription; let i = index">
+      <ngb-alert [animation]="true" [type]="alert.type" (closed)="close(i)" [dismissible]="true">
+        {{ alert.message }}
+      </ngb-alert>
+    </p>
+    <div>
+      <textarea name="" id="" cols="30" rows="5" class="form-control" [formControl]="description"></textarea>
+      <small class="w-100 text-right d-block mt-2"> {{ description.value?.length ? description.value?.length : '0' }} / 240</small>
+    </div>
+    <button mat-flat-button color="primary" class="mt-2" (click)="updateDescription()" style="height: 36px;" [disabled]="descriptionLoading">
+      <mat-spinner diameter="27" *ngIf="descriptionLoading"></mat-spinner>
+      {{ descriptionLoading ? '' : 'Salvar' }}
+    </button>
+  </div>
+
+  <div class="flex-row flex-column mt-3 p-3">
+    <label class="info-title">Categorias</label>
+    <p class="info-text">Selecione no máximo 6 categorias para o seu site abaixo.</p>
+    <p *ngFor="let alert of alertsCategory; let i = index">
+      <ngb-alert [animation]="true" [type]="alert.type" (closed)="close(i, 0)" [dismissible]="true">
+        {{ alert.message }}
+      </ngb-alert>
+    </p>
+    <div class="category-select ">
+      <div class="mb-2">
+        <mat-chip-list aria-label="Fish selection" >
+          <mat-chip color="primary" [removable]="true"  *ngFor="let category of userCategories" (removed)="removeCategory(category?._id)">
+            {{ category.type }}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+        </mat-chip-list>
+      </div>
+      <div class="category-wrapper">
+        <ul>
+          <li matRipple *ngFor="let category of categories" [ngClass]="{'active': checkSelected(category._id) }" (click)="addCategory(category?._id)">
+            <mat-icon class="mr-2">
+              {{ checkSelected(category._id) ? 'check_box' : 'check_box_outline_blank' }}
+            </mat-icon>
+            <span>{{ category?.type }}</span>
+          </li>
+        </ul>
+      </div>
+      <small class="w-100 text-right d-block mt-2"> {{ userCategories?.length }} / 6</small>
+    </div>
+    <button mat-flat-button color="primary" class="mt-3" (click)="updateCategories()" style="height: 36px;" [disabled]="categoryLoading">
+      <div class="d-flex flex-row align-items-center">
+        <mat-spinner diameter="27" *ngIf="categoryLoading"></mat-spinner>
+        {{ categoryLoading ? '' : 'Salvar' }}
+      </div>
+    </button>
+  </div>
+
+</div>

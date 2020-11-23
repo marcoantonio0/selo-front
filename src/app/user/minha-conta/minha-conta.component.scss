@@ -1,0 +1,39 @@
+.form-control {
+  height: 45px;
+}
+
+.form-control:focus {
+  color: #333;
+  background-color: #fff;
+  border-color: #7920fa !important;
+  outline: 0;
+  box-shadow: none;
+}
+
+.active-status {
+  padding: 8px;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  flex-direction: row;
+  text-align: center;
+  background: #d6dbe0;
+  border-radius: 5rem;
+  font-weight: 600;
+  .status{
+    height: 10px;
+    width: 10px;
+    margin-right: .35rem;
+    background-color: #333;
+    border-radius: 50%;
+    &.active{
+      background-color: var(--green);
+    }
+    &.banned{
+      background-color: var(--red);
+    }
+    &.inactive{
+      background-color: var(--gray);
+    }
+  }
+}

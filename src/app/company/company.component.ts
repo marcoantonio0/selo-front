@@ -19,6 +19,7 @@ export class CompanyComponent implements OnInit {
   public loadingRates = false;
   public allVotes = [];
   public session;
+  public notFound: boolean = false;
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
@@ -30,11 +31,10 @@ export class CompanyComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       if(params.id){
-        this.id = params.id;
         this.userService.getUser(params.id).subscribe(r => {
           this.company = r;
-
-          this.rateService.getById(params.id).subscribe(r => {
+          this.id = r.id;
+          this.rateService.getById(this.id).subscribe(r => {
             this.session = this.rateService.getCurrentSession();
             this.setAllVotes();
             this.rates = r.rates;
@@ -42,7 +42,7 @@ export class CompanyComponent implements OnInit {
           });
 
         }, e => {
-          this.router.navigate(['/']);
+          this.notFound = true;
         });
       } else {
         this.router.navigate(['/']);
@@ -70,7 +70,6 @@ export class CompanyComponent implements OnInit {
     const indexDeslikes = this.session.deslikes.findIndex(x => x === _id);
     if(type == 'likes'){
       if(indexLikes >= 0){
-        console.log(true);
         return true;
       } else {
         return false;

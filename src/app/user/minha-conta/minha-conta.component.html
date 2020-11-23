@@ -1,0 +1,228 @@
+<div class="menu-inner-wrapper p-3">
+  <div class="user-infos">
+    <div class="username-wrapper mb-4">
+      <picture class="user-picture">
+        <img [src]="sAuth.currentUserValue?.logotipo" [alt]="sAuth.currentUserValue?.fantasy_name" *ngIf="sAuth.currentUserValue?.logotipo.length > 0">
+        <img src="assets/default_profile.jpg" [alt]="sAuth.currentUserValue?.fantasy_name" *ngIf="sAuth.currentUserValue?.logotipo.length <= 0">
+      </picture>
+      <div class="user-name">
+        <h1>{{ sAuth.currentUserValue?.fantasy_name }}</h1>
+        <span class="active-status">
+          <span class="status" [ngClass]="{ 'inactive': sAuth.currentUserValue.status == 0, 'inactive': sAuth.currentUserValue.status == 2, 'active': sAuth.currentUserValue.status == 1, 'banned': sAuth.currentUserValue.status == 2 }"></span>
+          <span *ngIf="sAuth.currentUserValue.status == 0">Analise</span>
+          <span *ngIf="sAuth.currentUserValue.status == 1">Ativo</span>
+          <span *ngIf="sAuth.currentUserValue.status == 2">Inativo</span>
+          <span *ngIf="sAuth.currentUserValue.status == 3">Banido</span>
+        </span>
+      </div>
+    </div>
+    <div class="edit-areas">
+      <div class="edit-area mt-0">
+        <label class="edit-label">E-mail</label>
+        <div class="d-flex flex-row align-items-center w-100">
+          <div class="edit-area-input">
+            <span>{{ emailShow(sAuth.currentUserValue?.email) }} </span>
+            <!-- <input type="text" class="form-control"> -->
+            <button mat-button class="ml-2" (click)="showEmail ? showEmail = false : showEmail = true">
+              {{ showEmail ? 'Ocultar' : 'Mostrar' }}
+            </button>
+
+          </div>
+          <button mat-stroked-button color="primary" class="ml-2">Editar</button>
+        </div>
+      </div>
+      <div class="edit-area ">
+        <label class="edit-label">CNPJ</label>
+        <div class="d-flex flex-row align-items-center w-100">
+          <div class="edit-area-input">
+            <span>{{ sAuth.currentUserValue?.cnpj  | mask:'00.000.000/0000-00' }} </span>
+          </div>
+        </div>
+      </div>
+      <div class="edit-area">
+        <label class="edit-label">Site</label>
+        <div class="d-flex flex-row align-items-center w-100">
+          <div class="edit-area-input">
+            <span>{{ sAuth.currentUserValue?.website }}</span>
+            <!-- <input type="text" class="form-control"> -->
+          </div>
+        </div>
+      </div>
+      <div class="edit-area">
+        <label class="edit-label">Telefone</label>
+        <div class="d-flex flex-row align-items-center w-100">
+          <div class="edit-area-input">
+            <span>{{ sAuth.currentUserValue?.phone | mask:'(00) 0000-0000||(00) 0 0000-0000' }} </span>
+            <!-- <input type="text" class="form-control"> -->
+          </div>
+          <button mat-stroked-button color="primary" class="ml-2">Editar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex-row flex-column mt-3 p-3" *ngIf="address">
+    <span class="info-title">Endereço</span>
+    <div class="row mx-0">
+      <div class="col-12">
+        <div class="edit-area">
+          <label class="edit-label">CEP</label>
+          <div class="d-flex flex-row align-items-center w-100">
+            <div class="edit-area-input">
+              <span *ngIf="!editEmail">{{ address.value.cep | mask:'00000-000' }}</span>
+              <div *ngIf="editEmail" class="d-flex flex-column w-100">
+                <div class="position-relative">
+                  <input type="text" class="form-control" [formControl]="address.get('cep')" placeholder="00000-000" mask="00000-000" (keyup)="getCep($event.target.value)"  [ngClass]="{'is-invalid': getError('cep') }">
+                  <mat-spinner *ngIf="loadingCep" diameter="26" style="position: absolute; top: 0; bottom: 0; right: 10px; margin: auto;"></mat-spinner>
+                </div>
+                <small class="text-danger" *ngIf="getError('cep')">{{getError('cep')}}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-8">
+        <div class="edit-area">
+          <label class="edit-label">Endereço</label>
+          <div class="d-flex flex-row align-items-center w-100">
+            <div class="edit-area-input">
+              <span *ngIf="!editEmail">{{ address.value.address }}</span>
+              <div *ngIf="editEmail" class="d-flex flex-column w-100">
+                <input type="text" class="form-control"  [formControl]="address.get('address')"  [ngClass]="{'is-invalid': getError('address') }">
+                <small class="text-danger" *ngIf="getError('address')">{{getError('address')}}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="edit-area">
+          <label class="edit-label">Número</label>
+          <div class="d-flex flex-row align-items-center w-100">
+            <div class="edit-area-input">
+              <span *ngIf="!editEmail">{{ address.value.number }}</span>
+              <div *ngIf="editEmail" class="d-flex flex-column w-100">
+                <input type="text" class="form-control" [formControl]="address.get('number')" mask="0000000000000000" [validation]="false" *ngIf="editEmail" [ngClass]="{'is-invalid': getError('number') }">
+                <small class="text-danger" *ngIf="getError('number')">{{getError('number')}}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="edit-area">
+          <label class="edit-label">Complemento</label>
+          <div class="d-flex flex-row align-items-center w-100">
+            <div class="edit-area-input">
+              <span *ngIf="!editEmail">{{ address.value.complement }}</span>
+              <div *ngIf="editEmail" class="d-flex flex-column w-100">
+                <input type="text" class="form-control"  [formControl]="address.get('complement')" *ngIf="editEmail" [ngClass]="{'is-invalid': getError('complement') }">
+                <small class="text-danger" *ngIf="getError('complement')">{{getError('complement')}}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="edit-area">
+          <label class="edit-label">Cidade</label>
+          <div class="d-flex flex-row align-items-center w-100">
+            <div class="edit-area-input">
+              <span *ngIf="!editEmail">{{ address.value.city }}</span>
+              <div *ngIf="editEmail" class="d-flex flex-column w-100">
+                <input type="text" class="form-control" [formControl]="address.get('city')" *ngIf="editEmail" [ngClass]="{'is-invalid': getError('city') }">
+                <small class="text-danger" *ngIf="getError('city')">{{getError('city')}}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="edit-area">
+          <label class="edit-label">Bairro</label>
+          <div class="d-flex flex-row align-items-center w-100">
+            <div class="edit-area-input">
+              <span *ngIf="!editEmail">{{ address.value.district }}</span>
+              <div *ngIf="editEmail" class="d-flex flex-column w-100">
+                <input type="text" class="form-control"  [formControl]="address.get('district')" *ngIf="editEmail" [ngClass]="{'is-invalid': getError('district') }">
+                <small class="text-danger" *ngIf="getError('district')">{{getError('district')}}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="edit-area">
+          <label class="edit-label">Estado</label>
+          <div class="d-flex flex-row align-items-center w-100">
+            <div class="edit-area-input">
+              <span *ngIf="!editEmail">{{ address.value.uf }}</span>
+              <div *ngIf="editEmail" class="d-flex flex-column">
+                <select class="form-control" [formControl]="address.get('uf')" [ngClass]="{'is-invalid': getError('uf') }">
+                  <option value="AC">Acre</option>
+                  <option value="AL">Alagoas</option>
+                  <option value="AP">Amapá</option>
+                  <option value="AM">Amazonas</option>
+                  <option value="BA">Bahia</option>
+                  <option value="CE">Ceará</option>
+                  <option value="DF">Distrito Federal</option>
+                  <option value="ES">Espírito Santo</option>
+                  <option value="GO">Goiás</option>
+                  <option value="MA">Maranhão</option>
+                  <option value="MT">Mato Grosso</option>
+                  <option value="MS">Mato Grosso do Sul</option>
+                  <option value="MG">Minas Gerais</option>
+                  <option value="PA">Pará</option>
+                  <option value="PB">Paraíba</option>
+                  <option value="PR">Paraná</option>
+                  <option value="PE">Pernambuco</option>
+                  <option value="PI">Piauí</option>
+                  <option value="RJ">Rio de Janeiro</option>
+                  <option value="RN">Rio Grande do Norte</option>
+                  <option value="RS">Rio Grande do Sul</option>
+                  <option value="RO">Rondônia</option>
+                  <option value="RR">Roraima</option>
+                  <option value="SC">Santa Catarina</option>
+                  <option value="SP">São Paulo</option>
+                  <option value="SE">Sergipe</option>
+                  <option value="TO">Tocantins</option>
+                </select>
+                <small class="text-danger" *ngIf="getError('uf')">{{getError('uf')}}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex flex-row align-items-center mt-3">
+      <button mat-flat-button color="primary" class="mr-2" *ngIf="editEmail" (click)="submitEmail()" style="height: 36px;" [disabled]="emailLoading">
+        <div class="d-flex flex-row align-items-center justify-content-center">
+          <mat-spinner *ngIf="emailLoading" diameter="26" class="mr-2"></mat-spinner>
+          <span>{{ emailLoading ? '' : 'Salvar' }}</span>
+        </div>
+      </button>
+      <button mat-stroked-button color="warn"  *ngIf="editEmail" (click)="enactiveEmail()">
+        Cancelar
+      </button>
+      <button mat-flat-button color="primary" *ngIf="!editEmail" (click)="editEmail = true">
+        Editar endereço
+      </button>
+    </div>
+  </div>
+
+  <div class="flex-row flex-column mt-3 p-3">
+    <span class="info-title">Senha</span>
+    <p class="info-text">Solicite uma alteração de senha clicando no botão abaixo. Você receberá um e-mail para prosseguir.</p>
+    <button mat-flat-button color="primary">Alterar senha</button>
+  </div>
+
+  <div class="flex-row flex-column mt-3 p-3">
+    <span class="info-title">Remoção de conta</span>
+    <p class="info-text">Desativar a conta significa que você poderá recuperá-la quando quiser.</p>
+    <div class="d-flex flex-row align-items-center">
+      <button mat-flat-button color="warn" class="mr-3">Desativar conta</button>
+      <button mat-stroked-button color="warn">Excluir conta</button>
+    </div>
+  </div>
+
+</div>
