@@ -1,3 +1,4 @@
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { IndexComponent } from './index/index.component';
@@ -38,6 +39,7 @@ import { Error404Component } from './error404/error404.component';
     MatButtonModule,
     NgbModule,
     MatMenuModule,
+    MatSnackBarModule,
     MatIconModule
   ],
   providers: [

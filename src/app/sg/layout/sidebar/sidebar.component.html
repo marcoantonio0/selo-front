@@ -1,0 +1,46 @@
+<div class="user-sidebar-wrapper">
+  <picture>
+    <img [src]="user.logotipo" [alt]="user.fantasy_name" *ngIf="user.logotipo">
+    <div class="profile-default" *ngIf="!user.logotipo">
+      {{profileDefault}}
+    </div>
+  </picture>
+  <div class="user-info">
+    <span class="user-name">{{user.fantasy_name}}</span>
+    <span class="user-document">CNPJ {{ user.cnpj }}</span>
+  </div>
+</div>
+<div class="sidebar-menu-wrapper">
+  <ul class="sidebar-menu">
+    <li class="sb-item" [ngClass]="{ 'active': checkUrl('') }">
+      <a class="sb-link" [routerLink]="['/app']"  >
+        <mat-icon >home</mat-icon>
+        Painel
+      </a>
+    </li>
+    <li class="sb-item" [ngClass]="{ 'active': checkUrl('payment') }">
+      <a class="sb-link" [routerLink]="['/app']"  >
+        <mat-icon >payments</mat-icon>
+        Pagamentos
+      </a>
+    </li>
+    <li class="sb-item" [ngClass]="{ 'active': checkUrl('configuration') }">
+      <a  class="sb-link" [routerLink]="['/app/configuration']"  >
+        <mat-icon >settings</mat-icon>
+        Configuração
+      </a>
+    </li>
+    <li class="sb-item" [ngClass]="{ 'active': checkUrl('user') }">
+      <a  class="sb-link" [routerLink]="['/app/user']" >
+        <mat-icon >perm_identity</mat-icon>
+        Minha conta
+      </a>
+    </li>
+    <li class="sb-item exit">
+      <button class="sb-link" (click)="logout()">
+        <mat-icon >exit_to_app</mat-icon>
+        Sair
+      </button>
+    </li>
+  </ul>
+</div>

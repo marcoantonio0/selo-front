@@ -13,14 +13,14 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { UserRoutingModule } from './user-routing.module';
 import { UserComponent } from './user.component';
 import { MinhaContaComponent } from './minha-conta/minha-conta.component';
-import { MeuSiteComponent } from './meu-site/meu-site.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { OwnersComponent } from './owners/owners.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 @NgModule({
-  declarations: [UserComponent, MinhaContaComponent, MeuSiteComponent, PrivacyComponent, OwnersComponent],
+  declarations: [UserComponent, MinhaContaComponent, PrivacyComponent, OwnersComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
@@ -30,6 +30,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatProgressSpinnerModule,
     MatChipsModule,
     MatIconModule,
+    MatTabsModule,
     NgbAlertModule,
     MatInputModule,
     MatIconModule,

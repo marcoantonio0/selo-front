@@ -1,8 +1,8 @@
 import { Title } from '@angular/platform-browser';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { UserService } from './../../_services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
+import { UserService } from 'src/app/_services/user.service';
 
 @Component({
   selector: 'app-minha-conta',

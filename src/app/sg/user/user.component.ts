@@ -1,6 +1,6 @@
-import { AuthenticationService } from './../_services/authentication.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from 'src/app/_services/authentication.service';
 
 @Component({
   selector: 'app-user',
@@ -17,12 +17,12 @@ export class UserComponent implements OnInit {
       // see also
       this.url = this.route.url;
       // console.log(val instanceof NavigationEnd);
-  });
+    });
   }
 
   checkUrl(type: string){
     if(type === ''){
-      if(this.url === '/user'){
+      if(this.url === '/app/user'){
         return true;
       } else {
         return false;

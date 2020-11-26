@@ -12,6 +12,25 @@
   border-radius: 5px;
 }
 
+.menu-inner-wrapper a {
+  text-decoration: none;
+  font-size: 16px;
+  opacity: .6;
+  &:hover {
+    opacity: 1;
+    color: #333;
+  }
+}
+
+.mat-tab-link {
+  opacity: 1;
+}
+
+.mat-tab-link.mat-focus-indicator.mat-tab-label-active {
+  color: #7720fa;
+  opacity: 1 !important;
+}
+
 .menu-wrapper {
   padding: 15px;
 }

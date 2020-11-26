@@ -1,8 +1,8 @@
-import { UserService } from './../../_services/user.service';
-import { AuthenticationService } from './../../_services/authentication.service';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
+import { AuthenticationService } from 'src/app/_services/authentication.service';
+import { UserService } from 'src/app/_services/user.service';
 
 @Component({
   selector: 'app-owners',

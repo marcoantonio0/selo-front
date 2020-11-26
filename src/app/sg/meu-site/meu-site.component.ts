@@ -1,9 +1,9 @@
-import { AuthenticationService } from './../../_services/authentication.service';
-import { UserService } from './../../_services/user.service';
-import { CategoryService } from './../../_services/category.service';
 import { FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { CategoryService } from 'src/app/_services/category.service';
+import { UserService } from 'src/app/_services/user.service';
+import { AuthenticationService } from 'src/app/_services/authentication.service';
 
 @Component({
   selector: 'app-meu-site',

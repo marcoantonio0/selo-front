@@ -1,20 +1,30 @@
-<div class="section" style="background: #eaedf1;">
-  <div class="container h-100">
-    <div class="d-flex flex-row align-items-center justify-content-center h-100" style="min-height: 90vh;">
-      <div style="max-width: 368px; min-width: 368px" class="p-3">
+<div class="row mx-0" style="min-height: 100vh;">
+  <div class="col-12  col-lg-7 col-xl-7 login-cap d-none d-lg-flex d-xl-flex" >
+    <h1>
+      Bem-vindo!
+    </h1>
+  </div>
+  <div class="col-12  col-lg-5 col-xl-5">
+    <div class="d-flex flex-row align-items-center justify-content-center h-100">
+      <div class="box-login" >
+        <a [routerLink]="['/']">
+          <picture class="d-block mb-5">
+            <img src="assets/logo.svg" alt="" style="max-height: 45px;">
+          </picture>
+        </a>
         <h1 class="display-4">Bem-vindo!</h1>
-        <span>Faça seu login para continuar.</span>
+        <span class="title-info">Faça seu login para continuar.</span>
         <div *ngFor="let alert of alerts; let i = index" class="mt-2">
           <ngb-alert  [type]="alert.type" (closed)="close(i)" [dismissible]="true">
             {{ alert.error }}
           </ngb-alert>
         </div>
-        <form [formGroup]="loginForm" (ngSubmit)="loginSubmit()" class="my-3 p-3" style=" background-color: #fff; border-radius: 5px;">
+        <form [formGroup]="loginForm" (ngSubmit)="loginSubmit()" class="my-3">
           <p class="mb-0">
-            <mat-form-field appearance="outline" class="w-100">
+            <mat-form-field appearance="outline" class="w-100" style="height: 70px;">
               <mat-label>E-mail</mat-label>
-              <input type="email" matInput formControlName="email">
-              <mat-icon matPrefix style="color: #666;">person</mat-icon>
+              <input type="email" matInput formControlName="email" >
+              <mat-icon matPrefix style="color: #666;"  class="mr-2">person</mat-icon>
             </mat-form-field>
           </p>
           <div class="text-right mb-2">
@@ -24,7 +34,10 @@
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>Senha</mat-label>
               <input type="password" matInput formControlName="password">
-              <mat-icon matPrefix style="color: #666;"> lock</mat-icon>
+              <mat-icon matPrefix style="color: #666;" class="mr-2"> lock</mat-icon>
+              <button mat-icon-button matSuffix type="button" (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
             </mat-form-field>
           </p>
           <div class="text-right mb-2">

@@ -11,16 +11,16 @@ const routes: Routes = [
       path: '',
       component: IndexComponent
     },
-    { path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginModule) },
-    { path: 'register', loadChildren: () => import('./register/register.module').then(m => m.RegisterModule) },
     { path: 'company', loadChildren: () => import('./company/company.module').then(m => m.CompanyModule) },
     { path: 'forget-email', loadChildren: () => import('./forget-email/forget-email.module').then(m => m.ForgetEmailModule) },
     { path: 'forget-password', loadChildren: () => import('./forget-password/forget-password.module').then(m => m.ForgetPasswordModule) },
     { path: 'search', loadChildren: () => import('./search/search.module').then(m => m.SearchModule) },
-    { path: 'user', canActivate: [AuthGuard],  loadChildren: () => import('./user/user.module').then(m => m.UserModule) },
     { path: 'stores', loadChildren: () => import('./stores/stores.module').then(m => m.StoresModule) },
   ]},
   { path: 'checkout', loadChildren: () => import('./checkout/checkout.module').then(m => m.CheckoutModule) },
+  { path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginModule) },
+  { path: 'register', loadChildren: () => import('./register/register.module').then(m => m.RegisterModule) },
+  { path: 'app', canActivate: [AuthGuard], loadChildren: () => import('./sg/sg.module').then(m => m.SgModule) },
   {
     path: '**',
     component: Error404Component

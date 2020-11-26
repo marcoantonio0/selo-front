@@ -1,0 +1,23 @@
+.notification {
+  height: 108px;
+  background-color: #7920fa;
+  border-radius: 5px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 25px 40px;
+  h1 {
+    font-size: 24px;
+    line-height: 32px;
+    color: rgb(255, 255, 255);
+    margin: 0px;
+    font-weight: 600;
+    font-family: "Mont", sans-serif !important;
+  }
+  span {
+    font-size: 16px;
+    color: #fff;
+    font-weight: 400;
+    font-family: "Mont", sans-serif !important;
+  }
+}
