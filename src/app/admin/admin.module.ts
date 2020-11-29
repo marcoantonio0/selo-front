@@ -7,12 +7,11 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { HeaderComponent } from './layout/header/header.component';
-import { LayoutComponent } from './layout/layout.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 @NgModule({
-  declarations: [AdminComponent, SidebarComponent, HeaderComponent, LayoutComponent, DashboardComponent],
+  declarations: [AdminComponent, SidebarComponent, HeaderComponent, DashboardComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,

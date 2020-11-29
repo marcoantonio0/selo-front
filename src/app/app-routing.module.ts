@@ -24,6 +24,7 @@ const routes: Routes = [
   { path: 'app', canActivate: [AuthGuard], loadChildren: () => import('./sg/sg.module').then(m => m.SgModule) },
   { path: 'admin', canActivate: [AuthAdminGuard], loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
   { path: 'admin/login', loadChildren: () => import('./admin-login/admin-login.module').then(m => m.AdminLoginModule) },
+  { path: 'users', loadChildren: () => import('./admin/users/users.module').then(m => m.UsersModule) },
   {
     path: '**',
     component: Error404Component

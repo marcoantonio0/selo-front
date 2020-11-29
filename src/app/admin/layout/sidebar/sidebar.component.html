@@ -6,22 +6,10 @@
         Painel
       </a>
     </li>
-    <li class="sb-item" [ngClass]="{ 'active': checkUrl('payment') }">
-      <a class="sb-link" [routerLink]="['/admin/payment']"  >
-        <mat-icon >payments</mat-icon>
-        Pagamentos
-      </a>
-    </li>
-    <li class="sb-item" [ngClass]="{ 'active': checkUrl('configuration') }">
-      <a  class="sb-link" [routerLink]="['/admin/configuration']"  >
-        <mat-icon >settings</mat-icon>
-        Configuração
-      </a>
-    </li>
     <li class="sb-item" [ngClass]="{ 'active': checkUrl('user') }">
-      <a  class="sb-link" [routerLink]="['/admin/user']" >
+      <a class="sb-link" [routerLink]="['/admin/users']"  >
         <mat-icon >perm_identity</mat-icon>
-        Minha conta
+        Usuários
       </a>
     </li>
     <li class="sb-item exit">
