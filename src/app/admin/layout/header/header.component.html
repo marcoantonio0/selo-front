@@ -1,0 +1,17 @@
+<div class="w-100 d-flex flex-row align-items-center justify-content-between h-100 px-3">
+  <img src="assets/logo.svg" style="max-height: 35px;">
+
+  <button class="user-sidebar-wrapper">
+    <picture>
+      <img [src]="user.logotipo" [alt]="user.fantasy_name" *ngIf="user.logotipo">
+      <div class="profile-default" *ngIf="!user.logotipo">
+        {{profileDefault}}
+      </div>
+    </picture>
+    <div class="user-info">
+      <span class="user-name">{{user.first_name}}</span>
+    </div>
+  </button>
+
+</div>
+

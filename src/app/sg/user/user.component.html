@@ -1,0 +1,20 @@
+<h1>
+  Minha conta
+</h1>
+
+<div class="menu-inner-wrapper ">
+  <nav mat-tab-nav-bar>
+    <a mat-tab-link
+      [routerLink]="['/app/user']"
+       [active]="checkUrl('')">
+       Minha conta
+    </a>
+    <a mat-tab-link
+      [routerLink]="['/app/user/owners']"
+     [active]="checkUrl('owners')">
+     Proprietários
+  </a>
+  </nav>
+
+  <router-outlet></router-outlet>
+</div>

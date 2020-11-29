@@ -1,0 +1,20 @@
+<h1>
+  Pagamentos
+</h1>
+
+<div class="menu-inner-wrapper ">
+  <nav mat-tab-nav-bar>
+    <a mat-tab-link
+      [routerLink]="['/app/payment']"
+       [active]="checkUrl('')">
+      Pagamentos
+    </a>
+    <a mat-tab-link
+      [routerLink]="['/app/payment/subscription']"
+     [active]="checkUrl('subscription')">
+     Assinatura
+  </a>
+  </nav>
+
+  <router-outlet></router-outlet>
+</div>

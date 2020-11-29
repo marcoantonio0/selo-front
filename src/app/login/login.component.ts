@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', Validators.required)
   });
+  hide = true;
   alerts: any[];
   public hasError = false;
   public typeError = '';
@@ -33,7 +34,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/app';
   }
 
   reset() {
@@ -45,6 +46,7 @@ export class LoginComponent implements OnInit {
   }
 
   public showError(error, type: 'warning'|'danger'): void {
+    this.alerts.pop();
     this.alerts.push({type, error});
   }
 

@@ -1,0 +1,68 @@
+<h1>
+  Usuários
+</h1>
+<div class="menu-inner-wrapper p-3">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col" style="width: 75px;">ID</th>
+        <th scope="col" style="width: 60px;">Status</th>
+        <th scope="col">Empresa</th>
+        <th scope="col">Assinatura</th>
+        <th scope="col" style="text-align:right;">
+          Opções
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <th scope="row"  style="vertical-align: middle;">{{ user.id }}</th>
+        <td style="vertical-align: middle;">
+          <span class="badge badge-secondary" *ngIf="user.status == 0"> Análise</span>
+          <span class="badge badge-success" *ngIf="user.status == 1"> Ativo</span>
+          <span class="badge badge-secondary" *ngIf="user.status == 2"> Inativa</span>
+          <span class="badge badge-danger" *ngIf="user.status == 3"> Banido</span>
+        </td>
+        <td>
+          <div class="d-flex flex-column">
+            <span style="font-size: 14px; color: #333; font-weight: 600;">{{ user.fantasy_name }}</span>
+            <span style="font-size: 12px; color: #666; font-weight: 400;">CNPJ {{ user.cnpj }}</span>
+          </div>
+        </td>
+        <td style="vertical-align: middle;">
+          <span *ngIf="user?.plan" >
+            {{ user.plan.name  }}
+          </span>
+          <span *ngIf="!user?.plan">
+            -
+          </span>
+        </td>
+        <td align="right" style="vertical-align: middle;">
+          <div class="d-flex flex-row align-items-center justify-content-end">
+            <button class="action-button">
+              <mat-icon class="mat-18">visibility</mat-icon>
+            </button>
+            <div>
+              <button class="action-button" [matMenuTriggerFor]="menu">
+                <mat-icon class="mat-18">settings</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="active(user.id)">
+                  <span>Aprovar conta</span>
+                </button>
+                <button mat-menu-item (click)="inactive(user.id)">
+                  <span>Inativar conta</span>
+                </button>
+                <button mat-menu-item>
+                  <span>Excluir</span>
+                </button>
+              </mat-menu>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+

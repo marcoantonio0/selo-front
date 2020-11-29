@@ -1,0 +1,158 @@
+<div class="ck-body">
+  <div class="container pt-4">
+    <div class="row">
+      <div class="col-12 col-xl-4">
+        <div class="ck-box mb-3">
+          <div class="ck-header border-bottom">
+            <span class="ck-title ">
+              Minha Conta
+            </span>
+          </div>
+          <div class="ck-box-body">
+            <div class="d-flex flex-column">
+              <div class="d-flex flex-row align-items-center mb-2">
+                <span style="font-size: 14; color: #666; text-transform: uppercase; font-weight: 600;" class="mr-2">Nome Fantasia</span>
+                <span class="ck-plan-title">{{ user?.fantasy_name }}</span>
+              </div>
+              <div class="d-flex flex-row align-items-center mb-2">
+                <span style="font-size: 14; color: #666; text-transform: uppercase; font-weight: 600;" class="mr-2">CNPJ</span>
+                <span class="ck-plan-title">{{ user?.cnpj | mask: '00.000.000/0000-00' }}</span>
+              </div>
+              <div class="d-flex flex-row align-items-center mb-2">
+                <span style="font-size: 14; color: #666; text-transform: uppercase; font-weight: 600;" class="mr-2">E-mail</span>
+                <span class="ck-plan-title">{{ user?.email }}</span>
+              </div>
+            </div>
+            <div class="mb-3">
+              <span style="font-size: 14; color: #666; text-transform: uppercase; font-weight: 600;" class="mb-2 d-block">Endereço</span>
+              <div class="border p-2" style="border-radius: 5px;">
+                {{ user?.address.address }} {{ user?.address.number }}, {{ user?.address.district }} - {{ user?.address.cep | mask:'00000-000' }}, {{ user?.address.city }} {{ user?.address.uf }}
+              </div>
+            </div>
+            <span style="font-size: 14; color: #666; text-transform: uppercase; font-weight: 600;" class="mb-2 d-block">Proprietário(s)</span>
+            <div class="border p-2" style="border-radius: 5px;" >
+              <div class="d-flex flex-column mt-3" *ngFor="let owner of user?.owners; let i = index" [ngClass]="{ 'border-bottom': user?.owners.length > 0 && i != user?.owners.length-1  }">
+                <div class="d-flex flex-row align-items-center mb-2">
+                  <span style="font-size: 14; color: #666; text-transform: uppercase; font-weight: 600;" class="mr-2">Nome Completo</span>
+                  <span class="ck-plan-title">{{ owner.name }}</span>
+                </div>
+                <div class="d-flex flex-row align-items-center mb-2">
+                  <span style="font-size: 14; color: #666; text-transform: uppercase; font-weight: 600;" class="mr-2">CPF/CNPJ</span>
+                  <span class="ck-plan-title">{{ owner.cpfcnpj | mask: '000.000.000-00||00.000.000/0000-00' }}</span>
+                </div>
+                <div class="d-flex flex-row align-items-center mb-2">
+                  <span style="font-size: 14; color: #666; text-transform: uppercase; font-weight: 600;" class="mr-2">E-mail</span>
+                  <span class="ck-plan-title">{{ owner.email }}</span>
+                </div>
+                <div class="d-flex flex-row align-items-center mb-2">
+                  <span style="font-size: 14; color: #666; text-transform: uppercase; font-weight: 600;" class="mr-2">Cargo</span>
+                  <span class="ck-plan-title">{{ owner.role }}</span>
+                </div>
+                <div class="d-flex flex-row align-items-center mb-2">
+                  <span style="font-size: 14; color: #666; text-transform: uppercase; font-weight: 600;" class="mr-2">Tel/Cel</span>
+                  <span class="ck-plan-title">{{ owner.phone | mask: '(00) 0 0000-0000||(00) 0000-0000' }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-xl-8" [formGroup]="cartForm">
+        <div *ngFor="let alert of alerts; let i = index" class="mt-2">
+          <ngb-alert  [type]="alert.type" (closed)="close(i)" [dismissible]="true">
+            {{ alert.error }}
+          </ngb-alert>
+        </div>
+        <h1>Plano</h1>
+        <p>Selecione uma plano abaixo para efetuar o pagamento.</p>
+        <div class="row-products my-3">
+          <label  class=" input-product" *ngFor="let plan of plans; let i = index"  [for]="'plan-' + i">
+            <input type="radio" formControlName="product" [id]="'plan-' + i"  [value]="plan?.plan_id">
+            <div class=" box-product">
+              <span class="type">Compra Válida</span>
+              <h2 class="type-title">{{ plan?.name }}</h2>
+              <div class="price-row">
+                <span class="unit">R$</span>
+                <span class="price" [innerHTML]="getAmount(plan?.amount)"></span>
+                <span class="per-month">{{ plan?.frequency === 'MONTH' ? 'p/mês' : 'p/ano' }}</span>
+              </div>
+            </div>
+          </label>
+        </div>
+        <p style="color: var(--red)" *ngIf="cartForm.controls.product.invalid"> {{ getError(cartForm.controls.product) }}  </p>
+        <div class="ck-box mb-4">
+          <h2 class="p-3 border-bottom">Pagamento</h2>
+          <div class="card-wrapper">
+            <div class="card-credit">
+                <svg version="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" enable-background="new 0 0 48 48">
+                  <path fill="#FF9800" d="M5,35V13c0-2.2,1.8-4,4-4h30c2.2,0,4,1.8,4,4v22c0,2.2-1.8,4-4,4H9C6.8,39,5,37.2,5,35z"/>
+                  <g fill="#FFD54F">
+                      <path d="M43,21v-2H31c-1.1,0-2-0.9-2-2s0.9-2,2-2h1v-2h-1c-2.2,0-4,1.8-4,4s1.8,4,4,4h3v6h-3c-2.8,0-5,2.2-5,5 s2.2,5,5,5h2v-2h-2c-1.7,0-3-1.3-3-3s1.3-3,3-3h12v-2h-7v-6H43z"/>
+                      <path d="M17,27h-3v-6h3c2.2,0,4-1.8,4-4s-1.8-4-4-4h-3v2h3c1.1,0,2,0.9,2,2s-0.9,2-2,2H5v2h7v6H5v2h12 c1.7,0,3,1.3,3,3s-1.3,3-3,3h-2v2h2c2.8,0,5-2.2,5-5S19.8,27,17,27z"/>
+                  </g>
+              </svg>
+                <span class="card-number" *ngIf="cartForm.value.number">{{ cartForm.value.number | mask:'0000 0000 0000 0000||0000 0000 0000 0000 000' }}</span>
+                <span class="card-number" *ngIf="!cartForm.value.number">•••• •••• •••• ••••</span>
+                <span class="card-name" *ngIf="cartForm.value.name">{{  cartForm.value.name   }}</span>
+                <span class="card-name" *ngIf="!cartForm.value.name">Nome impresso</span>
+                <span class="card-expired" *ngIf="cartForm.value.expired">{{ cartForm.value.expired  | mask:'00/0000' }}</span>
+                <span class="card-expired"  *ngIf="!cartForm.value.expired">00/0000</span>
+                <div class="card-brand" [attr.cardtype]="cardType"></div>
+            </div>
+          </div>
+          <div class="ck-box-body">
+              <div class="row mx-0">
+                <div class="col-12">
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-label>Nome impresso no cartão</mat-label>
+                      <input matInput placeholder="Fulano A da Silva" formControlName="name" required>
+                      <mat-error *ngIf="cartForm.controls.name.invalid">{{ getError(cartForm.controls.name) }}</mat-error>
+                    </mat-form-field>
+
+
+                    <mat-form-field appearance="outline"  class="w-100">
+                      <mat-label>Número do Cartão</mat-label>
+                      <input matInput placeholder="0000 0000 0000 0000" formControlName="number" mask="0000 0000 0000 0000||0000 0000 0000 0000 000" required>
+                      <mat-error *ngIf="cartForm.controls.number.invalid">{{ getError(cartForm.controls.number) }}</mat-error>
+                    </mat-form-field>
+                </div>
+              </div>
+              <div class="row mx-0">
+                <div class="col-12 col-md-6 col-xl-4">
+
+                    <mat-form-field appearance="outline">
+                      <mat-label>Validade</mat-label>
+                      <input matInput placeholder="00/0000" formControlName="expired" mask="M0/0000"  [dropSpecialCharacters]="false" required>
+                      <mat-error *ngIf="cartForm.controls.expired.invalid">{{ getError(cartForm.controls.expired) }}</mat-error>
+                    </mat-form-field>
+
+                </div>
+                <div class="col-12 col-md-6 col-xl-4">
+
+                    <mat-form-field appearance="outline">
+                      <mat-label>CVV</mat-label>
+                      <input matInput placeholder="0000" formControlName="cvc" mask="0000" [validation]="false" required>
+                      <mat-error *ngIf="cartForm.controls.cvc.invalid">{{ getError(cartForm.controls.cvc) }}</mat-error>
+                    </mat-form-field>
+
+                </div>
+              </div>
+              <button mat-button class="payment-button" type="submit" (click)="pay()" [disabled]="loading">
+                <div class="d-flex flex-row align-items-center justify-content-center" *ngIf="!loading">
+                  <mat-icon class="mr-2">credit_card</mat-icon>
+                  <span>
+                    Pagar com cartão
+                  </span>
+                </div>
+                <div  class="d-flex flex-row align-items-center justify-content-center" *ngIf="loading">
+                  <mat-spinner diameter="27" class="mr-2"></mat-spinner>
+                  <span>Processando pagamento...</span>
+                </div>
+              </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

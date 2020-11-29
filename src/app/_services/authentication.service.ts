@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { api } from 'src/environments/environment';
 import { isPlatformBrowser } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Injectable({ providedIn: 'root' })
@@ -13,7 +14,8 @@ export class AuthenticationService {
 
     constructor(
       private http: HttpClient,
-      @Inject(PLATFORM_ID) private platformId
+      @Inject(PLATFORM_ID) private platformId,
+      private snack: MatSnackBar
       ) {
         this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser')));
         this.currentUser = this.currentUserSubject.asObservable();
@@ -29,6 +31,7 @@ export class AuthenticationService {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('currentUser', JSON.stringify(user));
                 this.currentUserSubject.next(user);
+                this.snack.open('Login efetuado com sucesso!', 'OK', { duration: 4000 });
                 return user;
             }));
     }

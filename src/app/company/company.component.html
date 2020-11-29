@@ -89,8 +89,7 @@
             <div class="about-body" *ngIf="company?.category.length > 0">
               <h3 style="font-size: 16px; font-weight: 500; ">Categorias</h3>
               <mat-chip-list>
-              <mat-chip
-                *ngFor="let category of company.category">
+              <mat-chip *ngFor="let category of company.category" [routerLink]="['/stores/c/'+category._id]" style="cursor: pointer;">
                 {{category.type}}
               </mat-chip>
             </mat-chip-list>

@@ -1,0 +1,20 @@
+.action-button {
+  height: 30px;
+  width: 30px;
+  border: none;
+  appearance: none;
+  background-color: transparent;
+  margin-right: 5px;
+  color: var(--blue);
+  display: flex;
+  border-radius: 5px;
+  align-items: center;
+  justify-content: center;
+  outline: 0;
+  .mat-icon {
+    font-size: 21px;
+  }
+  &:hover {
+    background-color: #007bff2e;
+  }
+}
