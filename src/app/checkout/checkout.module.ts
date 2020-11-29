@@ -9,10 +9,14 @@ import { CommonModule } from '@angular/common';
 import { CheckoutRoutingModule } from './checkout-routing.module';
 import { CheckoutComponent } from './checkout.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PaymentComponent } from './payment/payment.component';
+import { ThanksComponent } from './thanks/thanks.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
-  declarations: [CheckoutComponent],
+  declarations: [CheckoutComponent, PaymentComponent, ThanksComponent],
   imports: [
     CommonModule,
     CheckoutRoutingModule,
@@ -20,6 +24,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatIconModule,
     MatButtonModule,
+    NgbAlertModule,
+    MatProgressSpinnerModule,
     ReactiveFormsModule,
     NgxMaskModule.forRoot()
   ]

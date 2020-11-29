@@ -1,0 +1,71 @@
+.user-sidebar-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 45px;
+  padding: 7px;
+  background: #eee;
+  border-radius: 5px;
+  border: none;
+  picture {
+    min-height: 35px;
+    max-width: 35px;
+    min-width: 35px;
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: #eee;
+    border: 1px solid #eee;
+    margin-right: .65rem;
+    img {
+      max-width: 35px;
+    }
+  }
+  .user-info {
+    display: flex;
+    flex-direction: column;
+    .user-name {
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 1.5;
+      color: #333333;
+      font-style: normal;
+      font-stretch: normal;
+      font-family: "Mont", sans-serif !important;
+      letter-spacing: normal;
+      text-align: left;
+      display: block;
+      max-width: 60px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+    .user-document {
+      color: rgb(153, 153, 153);
+      font-family: "Mont", sans-serif !important;
+      font-size: 12px;
+      font-weight: 500;
+    }
+  }
+}
+
+
+
+.profile-default {
+  height: 100%;
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #7920fa;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+  font-family: "Mont", sans-serif !important;
+}

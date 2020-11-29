@@ -11,6 +11,7 @@ const routes: Routes = [
     },
     { path: 'user',  loadChildren: () => import('./user/user.module').then(m => m.UserModule) },
     { path: 'configuration',  loadChildren: () => import('./meu-site/meu-site.module').then(m => m.MeuSiteModule) },
+    { path: 'payment',  loadChildren: () => import('./payment/payment.module').then(m => m.PaymentModule) },
   ] }
 ];
 

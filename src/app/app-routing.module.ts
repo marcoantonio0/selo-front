@@ -4,6 +4,7 @@ import { LayoutComponent } from './layout/layout.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { IndexComponent } from './index/index.component';
+import { AuthAdminGuard } from './auth/auth-admin.guard';
 
 const routes: Routes = [
   { path: '', component: LayoutComponent, children: [
@@ -21,6 +22,8 @@ const routes: Routes = [
   { path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginModule) },
   { path: 'register', loadChildren: () => import('./register/register.module').then(m => m.RegisterModule) },
   { path: 'app', canActivate: [AuthGuard], loadChildren: () => import('./sg/sg.module').then(m => m.SgModule) },
+  { path: 'admin', canActivate: [AuthAdminGuard], loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
+  { path: 'admin/login', loadChildren: () => import('./admin-login/admin-login.module').then(m => m.AdminLoginModule) },
   {
     path: '**',
     component: Error404Component

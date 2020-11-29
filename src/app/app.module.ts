@@ -40,7 +40,7 @@ import { Error404Component } from './error404/error404.component';
     NgbModule,
     MatMenuModule,
     MatSnackBarModule,
-    MatIconModule
+    MatIconModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

@@ -7,7 +7,7 @@
   </picture>
   <div class="user-info">
     <span class="user-name">{{user.fantasy_name}}</span>
-    <span class="user-document">CNPJ {{ user.cnpj }}</span>
+    <span class="user-document">CNPJ {{ user.cnpj | mask: '00.000.000/0000-00' }}</span>
   </div>
 </div>
 <div class="sidebar-menu-wrapper">
@@ -19,7 +19,7 @@
       </a>
     </li>
     <li class="sb-item" [ngClass]="{ 'active': checkUrl('payment') }">
-      <a class="sb-link" [routerLink]="['/app']"  >
+      <a class="sb-link" [routerLink]="['/app/payment']"  >
         <mat-icon >payments</mat-icon>
         Pagamentos
       </a>
