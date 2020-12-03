@@ -16,7 +16,8 @@ export class UserService {
   private category = api.url + '/user/category/';
   private description = api.url + '/user/description/';
   private owners = api.url + '/user/owners/';
-  private store = api.url + '/user';
+  private stores = api.url + '/stores';
+  private store = api.url + '/store/';
   constructor(
     private http: HttpClient,
     private sAuth: AuthenticationService
@@ -34,12 +35,16 @@ export class UserService {
     return this.http.get(`https://viacep.com.br/ws/${cep}/json`);
   }
 
-  public getUser(id: any): Observable<any> {
-    return this.http.get(this.user + id);
+  public getStore(id: any): Observable<any> {
+    return this.http.get(this.store + id);
   }
 
   public getAddress(id: any): Observable<any> {
     return this.http.get(this.address + id);
+  }
+
+  public getUserRegister(id: any): Observable<any> {
+    return this.http.get(this.user + id, { headers: this.headers });
   }
 
   public getOwners(id: any): Observable<any> {
@@ -66,6 +71,10 @@ export class UserService {
     return this.http.put(this.owners + id, data, { headers: this.headers });
   }
 
+  public getUserPlan(id: any): Observable<any> {
+    return this.http.get(this.user + id + '/plan', { headers: this.headers });
+  }
+
   public getStores(offset?: any, category?: any, media?: any): Observable<any> {
     let hasQuery = '';
     if (offset || category || media){
@@ -74,7 +83,7 @@ export class UserService {
     const offsetValue = offset ? `offset=${offset}${category ? '&' : ''}` : '';
     const categoryValue = category ? `category=${category}${media ? '&' : ''}` : '';
     const mediaValue = media ? `media=${media}` : '';
-    return this.http.get(this.store + hasQuery + offsetValue + categoryValue + mediaValue);
+    return this.http.get(this.stores + hasQuery + offsetValue + categoryValue + mediaValue);
   }
 
 }

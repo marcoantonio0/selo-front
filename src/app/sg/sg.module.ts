@@ -1,5 +1,6 @@
+import { RegisterModule } from './register/register.module';
+import { LoginModule } from './login/login.module';
 import { MatIconModule } from '@angular/material/icon';
-import { UserModule } from './user/user.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -19,11 +20,14 @@ import { NgxMaskModule } from 'ngx-mask';
     LayoutComponent,
     HeaderComponent,
     SidebarComponent,
-    DashboardComponent],
+    DashboardComponent
+  ],
   imports: [
     CommonModule,
     SgRoutingModule,
     MatIconModule,
+    LoginModule,
+    RegisterModule,
     MeuSiteModule,
     NgxMaskModule.forRoot()
   ]

@@ -6,13 +6,27 @@
         <img src="assets/default_profile.jpg" [alt]="sAuth.currentUserValue?.fantasy_name" *ngIf="sAuth.currentUserValue?.logotipo.length <= 0">
       </picture>
       <div class="user-name">
-        <h1>{{ sAuth.currentUserValue?.fantasy_name }}</h1>
+        <div class="d-flex flex-row align-items-center mb-3">
+          <h1 class="mb-0 mr-3">{{ sAuth.currentUserValue?.fantasy_name }}</h1>
+          <div class="d-flex flex-row align-items-center"  *ngIf="user.plan.id == 2">
+            <img src="assets/img/premium.svg" alt="" style="width: 25px; height: 25px;">
+            <span style="color: #fd5900; font-size: 14px; font-weight: 600;" class="ml-1">Premium</span>
+          </div>
+          <div class="d-flex flex-row align-items-center" *ngIf="user.plan.id == 1">
+            <img src="assets/img/basic.svg" alt="" style="width: 25px; height: 25px;">
+            <span style="color: #7920fa; font-size: 14px; font-weight: 600;" class="ml-1">Basico</span>
+          </div>
+          <div class="d-flex flex-row align-items-center" *ngIf="!user.plan">
+            <img src="assets/img/gratis.svg" alt="" style="width: 25px; height: 25px;">
+            <span style="color: #00b59c; font-size: 14px; font-weight: 600;" class="ml-1">Grátis</span>
+          </div>
+        </div>
         <span class="active-status">
-          <span class="status" [ngClass]="{ 'inactive': sAuth.currentUserValue.status == 0, 'active': sAuth.currentUserValue.status == 1, 'banned': sAuth.currentUserValue.status == 2 }"></span>
-          <span *ngIf="sAuth.currentUserValue.status == 0">Analise</span>
-          <span *ngIf="sAuth.currentUserValue.status == 1">Ativo</span>
-          <span *ngIf="sAuth.currentUserValue.status == 2">Inativo</span>
-          <span *ngIf="sAuth.currentUserValue.status == 3">Banido</span>
+          <span class="status" [ngClass]="{ 'inactive': user.status == 0, 'active': user.status == 1, 'banned': user.status == 2 }"></span>
+          <span *ngIf="user.status == 0">Analise</span>
+          <span *ngIf="user.status == 1">Ativo</span>
+          <span *ngIf="user.status == 2">Inativo</span>
+          <span *ngIf="user.status == 3">Banido</span>
         </span>
       </div>
     </div>
@@ -21,7 +35,7 @@
         <label class="edit-label">E-mail</label>
         <div class="d-flex flex-row align-items-center w-100">
           <div class="edit-area-input">
-            <span>{{ emailShow(sAuth.currentUserValue?.email) }} </span>
+            <span>{{ emailShow(user?.email) }} </span>
             <!-- <input type="text" class="form-control"> -->
             <button mat-button class="ml-2" (click)="showEmail ? showEmail = false : showEmail = true">
               {{ showEmail ? 'Ocultar' : 'Mostrar' }}

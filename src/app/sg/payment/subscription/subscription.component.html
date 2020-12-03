@@ -1,1 +1,41 @@
-<p>subscription works!</p>
+<div class="row my-4 px-3">
+  <div class="col-4">
+    <div class="type-subscription">
+      <img src="../../../../assets/img/gratis.svg" alt="Grátis"  *ngIf="isFree">
+      <img src="../../../../assets/img/premium.svg" alt="Premium"  *ngIf="user.id == 2">
+      <img src="../../../../assets/img/basico.svg" alt="Básico"  *ngIf="user.id == 1">
+      <span class="type-text" *ngIf="user.id == 1">Básico</span>
+      <span class="type-text" *ngIf="user.id == 2">Premium</span>
+      <span class="type-text" *ngIf="isFree">Grátis</span>
+    </div>
+  </div>
+  <div class="col-8">
+    <div class="d-flex flex-column">
+      <span class="text-title mb-2">
+        Preço total
+      </span>
+      <div class="d-flex flex-row align-items-center" *ngIf="!isFree">
+        <span class="text-price"  >
+          {{ user.amount | currency:'BRL' }}
+        </span>
+        <span class="ml-2">p/mês</span>
+      </div>
+      <div class="d-flex flex-row align-items-center" *ngIf="isFree">
+        <span class="text-price"  >
+          Grátis
+        </span>
+      </div>
+    </div>
+    <div class="d-flex flex-column mt-3">
+      <span class="text-title mb-2">
+        Estado
+      </span>
+      <span style="color: #333; font-weight: 600;">
+        {{ user.status ? 'ATIVO' : 'INATIVO' }}
+      </span>
+    </div>
+    <div class="d-flex flex-row align-items-center mt-3">
+      <button mat-flat-button color="warn" *ngIf="!isFree">Cancelar Assinatura</button>
+    </div>
+  </div>
+</div>

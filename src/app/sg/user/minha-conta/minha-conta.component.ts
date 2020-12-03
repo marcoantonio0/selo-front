@@ -14,6 +14,7 @@ export class MinhaContaComponent implements OnInit {
   editEmail = false;
   emailLoading = false;
   loadingCep = false;
+  public user;
   public defaultAddress;
   public address = new FormGroup({
     address: new FormControl('', [Validators.required, Validators.maxLength(128)]),
@@ -30,15 +31,16 @@ export class MinhaContaComponent implements OnInit {
     private title: Title
   ) {
     this.title.setTitle('Minha Conta');
-    this.sUser.getAddress(this.sAuth.currentUserValue.id).subscribe(r => {
-      this.defaultAddress = r;
-      this.address.get('address').setValue(r.address);
-      this.address.get('number').setValue(r.number);
-      this.address.get('cep').setValue(r.cep);
-      this.address.get('city').setValue(r.city);
-      this.address.get('complement').setValue(r.complement);
-      this.address.get('district').setValue(r.district);
-      this.address.get('uf').setValue(r.uf);
+    this.sUser.getUserRegister(this.sAuth.currentUserValue.id).subscribe(r => {
+      this.defaultAddress = r.place;
+      this.user = r;
+      this.address.get('address').setValue(r.place.address);
+      this.address.get('number').setValue(r.place.number);
+      this.address.get('cep').setValue(r.place.cep);
+      this.address.get('city').setValue(r.place.city);
+      this.address.get('complement').setValue(r.place.complement);
+      this.address.get('district').setValue(r.place.district);
+      this.address.get('uf').setValue(r.place.uf);
     }, e => {
       console.log('Erro ao encontrar endereço.');
     });

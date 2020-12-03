@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'checkout', loadChildren: () => import('./checkout/checkout.module').then(m => m.CheckoutModule) },
   { path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginModule) },
   { path: 'register', loadChildren: () => import('./register/register.module').then(m => m.RegisterModule) },
-  { path: 'app', canActivate: [AuthGuard], loadChildren: () => import('./sg/sg.module').then(m => m.SgModule) },
+  { path: 'app', loadChildren: () => import('./sg/sg.module').then(m => m.SgModule) },
   { path: 'admin', canActivate: [AuthAdminGuard], loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
   { path: 'admin/login', loadChildren: () => import('./admin-login/admin-login.module').then(m => m.AdminLoginModule) },
   { path: 'users', loadChildren: () => import('./admin/users/users.module').then(m => m.UsersModule) },

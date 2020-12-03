@@ -31,7 +31,7 @@ export class CompanyComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       if(params.id){
-        this.userService.getUser(params.id).subscribe(r => {
+        this.userService.getStore(params.id).subscribe(r => {
           this.company = r;
           this.id = r.id;
           this.rateService.getById(this.id).subscribe(r => {

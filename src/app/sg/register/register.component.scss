@@ -1,0 +1,28 @@
+.owner-row {
+  border-radius: 5px;
+  padding: 10px;
+  position: relative;
+  &:hover {
+    background-color: #f3f3f3;
+  }
+}
+
+.remove-owner {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  z-index: 2;
+  color: #fff;
+  background-color: var(--red);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

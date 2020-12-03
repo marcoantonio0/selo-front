@@ -1,28 +1,90 @@
-.owner-row {
-  border-radius: 5px;
-  padding: 10px;
-  position: relative;
-  &:hover {
-    background-color: #f3f3f3;
+
+.section {
+  min-height: 100vh;
+}
+
+.features {
+  -webkit-order: 0;
+  -ms-flex-order: 0;
+  order: 0;
+  -webkit-flex: 0 1 auto;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  -webkit-align-self: stretch;
+  -ms-flex-item-align: stretch;
+  align-self: stretch;
+  background-color: #7720fa;
+  min-width: 280px;
+  @media (max-width: 1191.99px) and (min-width: 0px){
+    min-width: 100%;
   }
 }
 
-.remove-owner {
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  z-index: 2;
-  color: #fff;
-  background-color: var(--red);
+.register-wrapper {
+  -webkit-order: 0;
+    -ms-flex-order: 0;
+    order: 0;
+    -webkit-flex: 0 1 auto;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
+    -webkit-align-self: stretch;
+    -ms-flex-item-align: stretch;
+    align-self: stretch;
+    padding: 1.5rem;
+    min-width: 450px;
+    @media (max-width: 1191.99px) and (min-width: 0px){
+      min-width: 100%;
+    }
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
+.steppers {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0;
   margin: 0;
+  appearance: none;
+  list-style: none;
+  margin-bottom: 1rem;
+  li {
+    height: 8px;
+    background-color: #eee;
+    min-width: 50px;
+    margin-right: 10px;
+    &.active {
+      background-color: #7720fa;
+    }
+  }
 }
 
-/* Firefox */
-input[type=number] {
-  -moz-appearance: textfield;
+.mat-form-field {
+  line-height: 1.825;
 }
+
+.box-register {
+  overflow: hidden;
+  background-color: #fff;
+  border-radius: 5px;
+  min-height: 450px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-align-content: stretch;
+  -ms-flex-line-pack: stretch;
+  align-content: stretch;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+}
+
+

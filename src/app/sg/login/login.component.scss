@@ -19,9 +19,8 @@
 }
 
 .title-info {
-  font-size: 16px;
+  font-size: 21px;
   color: #666;
-  font-weight: 500;
 }
 
 .mat-form-field {
@@ -34,23 +33,5 @@
   @media (max-width: 991.91px) and (min-width: 0) {
     max-width: 290px;
     min-width: 290px;
-  }
-}
-
-.login-wrapper {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background-color: #eaedf1;
-}
-
-.box-login {
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgb(0 0 0 / 18%);
-  a {
-    color: #7920fa;
   }
 }

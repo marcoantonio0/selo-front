@@ -18,16 +18,34 @@
         Painel
       </a>
     </li>
-    <li class="sb-item" [ngClass]="{ 'active': checkUrl('payment') }">
-      <a class="sb-link" [routerLink]="['/app/payment']"  >
+    <li class="sb-item" [ngClass]="{ 'active': checkUrl('product') }">
+      <a class="sb-link" [routerLink]="['/app/product']"  >
         <mat-icon >payments</mat-icon>
-        Pagamentos
+        Produtos
+      </a>
+    </li>
+    <li class="sb-item" [ngClass]="{ 'active': checkUrl('showcase') }">
+      <a  class="sb-link" [routerLink]="['/app/showcase']" >
+        <mat-icon >perm_identity</mat-icon>
+        Vitrine
+      </a>
+    </li>
+    <li class="sb-item" [ngClass]="{ 'active': checkUrl('showcase') }">
+      <a  class="sb-link" [routerLink]="['/app/showcase']" >
+        <mat-icon >perm_identity</mat-icon>
+        Avaliações
       </a>
     </li>
     <li class="sb-item" [ngClass]="{ 'active': checkUrl('configuration') }">
       <a  class="sb-link" [routerLink]="['/app/configuration']"  >
         <mat-icon >settings</mat-icon>
         Configuração
+      </a>
+    </li>
+    <li class="sb-item" [ngClass]="{ 'active': checkUrl('payment') }">
+      <a class="sb-link" [routerLink]="['/app/payment']"  >
+        <mat-icon >payments</mat-icon>
+        Pagamentos
       </a>
     </li>
     <li class="sb-item" [ngClass]="{ 'active': checkUrl('user') }">

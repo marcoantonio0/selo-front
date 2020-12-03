@@ -1,3 +1,4 @@
+import { AuthenticationCustomerService } from 'src/app/_services/authentication-customer.service';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from './../../_services/authentication.service';
@@ -15,7 +16,7 @@ export class HeaderComponent implements OnInit {
     search: new FormControl('', [Validators.required])
   });
   constructor(
-    public sAtuth: AuthenticationService,
+    public sAtuth: AuthenticationCustomerService,
     @Inject(PLATFORM_ID) private platformId,
     private route: Router
   ) { }

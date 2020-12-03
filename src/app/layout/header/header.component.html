@@ -23,7 +23,7 @@
           <a class="nav-link" [routerLink]="['/stores']">Lojas</a>
         </li>
       </ul>
-      <button mat-icon-button  (click)="openSearch()" class="search-button">
+      <button mat-icon-button  (click)="openSearch()" class="search-button mr-2">
         <mat-icon>
           {{ searchStatus ? 'close' : 'search' }}
         </mat-icon>
@@ -42,11 +42,10 @@
       <div class="d-flex flex-row align-items-center" *ngIf="sAtuth.currentUserValue">
         <button class="logged-button" [matMenuTriggerFor]="menu" >
           <picture>
-            <img *ngIf="sAtuth.currentUserValue?.logotipo.length <= 0" src="assets/default_profile.jpg" [alt]="sAtuth.currentUserValue?.fantasy_name">
-            <img *ngIf="sAtuth.currentUserValue?.logotipo.length > 0" [src]="sAtuth.currentUserValue?.logotipo" [alt]="sAtuth.currentUserValue?.fantasy_name">
+            <img  src="assets/default_profile.jpg" [alt]="sAtuth.currentUserValue?.name">
           </picture>
           <span>
-            {{ sAtuth.currentUserValue.fantasy_name }}
+            {{ sAtuth.currentUserValue.name }}
           </span>
         </button>
         <mat-menu #menu="matMenu" xPosition="before">

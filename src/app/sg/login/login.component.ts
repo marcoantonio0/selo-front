@@ -1,10 +1,9 @@
-import { AuthenticationCustomerService } from './../_services/authentication-customer.service';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthenticationService } from './../_services/authentication.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { environment } from 'src/environments/environment';
+import { AuthenticationService } from 'src/app/_services/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -25,21 +24,17 @@ export class LoginComponent implements OnInit {
   public disabled: boolean = false;
   public isLoading: boolean = false;
   constructor(
-    private sAuthentication: AuthenticationCustomerService,
+    private sAuthentication: AuthenticationService,
     private router: Router,
     private route: ActivatedRoute,
     private title: Title
   ) {
     this.title.setTitle(`Login | ${environment.pageTitle}`);
-
     this.reset();
   }
 
   ngOnInit(): void {
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-    if(this.sAuthentication.currentUserValue !== undefined){
-      this.router.navigate(this.returnUrl);
-    }
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/app';
   }
 
   reset() {

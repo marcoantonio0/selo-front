@@ -2,8 +2,8 @@
 
     <section class="info-company">
       <div class="container">
-      <div class="info-box w-100">
-        <div class="row w-100 mx-0">
+      <div class="info-box pb-0 d-flex flex-column w-100">
+        <div class="row mx-0 pt-4 px-3">
           <div class="col-12 col-xl-2 d-flex flex-column align-items-center justify-content-center">
             <picture class="user-profile">
               <img [src]="company?.logotipo" [alt]="company?.fantasy_name" *ngIf="company?.logotipo">
@@ -12,7 +12,7 @@
           </div>
           <div class="col-12 col-md-8 col-xl-8 my-3 my-xl-0">
             <h1 class="mb-3 title-company">{{ company?.fantasy_name }}</h1>
-            <p class="mb-0">{{ company?.description }}</p>
+            <p class="mb-2">{{ company?.description }}</p>
             <a mat-button target="_blank" [href]="'https://'+company?.website" class="mt-2">
               <mat-icon class="mr-2">open_in_new </mat-icon> Abrir Site
             </a>
@@ -25,6 +25,16 @@
               </div>
             </div>
           </div>
+        </div>
+        <div class="menu-wrapper w-100">
+          <ul class="menu-list">
+            <li class="active" matRipple>
+              <a href="http://">Empresa</a>
+            </li>
+            <li matRipple>
+              <a href="http://">Produtos</a>
+            </li>
+          </ul>
         </div>
       </div>
     </div>

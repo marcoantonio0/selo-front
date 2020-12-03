@@ -14,7 +14,6 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatSelectModule} from '@angular/material/select';
 import {MatIconModule} from '@angular/material/icon';
 import { NgxMaskModule, IConfig } from 'ngx-mask'
-import {MatRadioModule} from '@angular/material/radio';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
@@ -29,7 +28,6 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     MatButtonModule,
     NgbAlertModule,
     NgbAlertModule,
-    MatRadioModule,
     MatProgressSpinnerModule,
     MatStepperModule,
     MatSelectModule,

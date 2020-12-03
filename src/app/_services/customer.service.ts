@@ -1,25 +1,26 @@
-import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AuthenticationService } from './authentication.service';
+import { Observable } from 'rxjs';
 import { api } from 'src/environments/environment';
+import { AuthenticationCustomerService } from './authentication-customer.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CategoryService {
+export class CustomerService {
   private headers: HttpHeaders;
+  private register = api.url + '/customer';
   constructor(
     private http: HttpClient,
-    private sAuth: AuthenticationService
-    ) {
+    private sAuth: AuthenticationCustomerService
+  ) {
     this.headers = new HttpHeaders({
       Authorization: 'Bearer ' + this.sAuth.currentUserValue?.access_token
     });
   }
 
-  getCategories(): Observable<any> {
-    return this.http.get(api.url + '/category', { headers: this.headers });
+  public create(json: any): Observable<any> {
+    return this.http.post(this.register, json);
   }
 
 }
