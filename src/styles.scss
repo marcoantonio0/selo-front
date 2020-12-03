@@ -20,6 +20,7 @@ header .nav {
 }
 
 a.nav-link {
+  letter-spacing: .65px;
   color: #666 !important;
   font-family: "Mont", sans-serif !important;
   &:hover {
@@ -31,7 +32,7 @@ a.nav-link {
 
 .content {
   padding-top: 67px;
-  background-color: #eaedf1;
+  background-color: #dde8fe63 ;
 }
 
 .star {
@@ -235,7 +236,7 @@ a.nav-link {
 
 .ck-body {
   min-height: 90vh;
-  background-color: #eaedf1;
+  background-color: #dde8fe63 ;
 }
 
 .ck-box {
