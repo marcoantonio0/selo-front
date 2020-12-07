@@ -19,6 +19,7 @@ import { ErrorInterceptor } from './auth/error.interceptor';
 import { MatRippleModule } from '@angular/material/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Error404Component } from './error404/error404.component';
+import { NotFoundComponent } from './layout/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { Error404Component } from './error404/error404.component';
     HeaderComponent,
     FooterComponent,
     IndexComponent,
-    Error404Component
+    Error404Component,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

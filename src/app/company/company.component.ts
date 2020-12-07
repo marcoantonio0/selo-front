@@ -1,7 +1,8 @@
 import { RateService } from './../_services/rate.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { UserService } from './../_services/user.service';
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { IfStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-company',
@@ -10,15 +11,8 @@ import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 })
 export class CompanyComponent implements OnInit {
   public company;
-  public rates;
-  private id;
-  private offset = 0;
-  private limit = 5;
-  private page = 1;
-  public total;
-  public loadingRates = false;
-  public allVotes = [];
-  public session;
+  public id;
+  public url;
   public notFound: boolean = false;
   constructor(
     private route: ActivatedRoute,
@@ -26,21 +20,13 @@ export class CompanyComponent implements OnInit {
     public rateService: RateService,
     private router: Router,
     @Inject(PLATFORM_ID) private platformId,
-  ) { }
-
-  ngOnInit(): void {
+  ) {
+    this.url = this.route.snapshot.url;
     this.route.params.subscribe(params => {
       if(params.id){
         this.userService.getStore(params.id).subscribe(r => {
           this.company = r;
           this.id = r.id;
-          this.rateService.getById(this.id).subscribe(r => {
-            this.session = this.rateService.getCurrentSession();
-            this.setAllVotes();
-            this.rates = r.rates;
-            this.total = r.total;
-          });
-
         }, e => {
           this.notFound = true;
         });
@@ -48,76 +34,28 @@ export class CompanyComponent implements OnInit {
         this.router.navigate(['/']);
       }
     });
+
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.url = event.url;
+        console.log(this.url);
+      }
+    });
   }
 
-  setAllVotes(): void {
-    for (const likes of this.session.likes) {
-      this.allVotes.push(likes)
-    }
-    for (const deslikes of this.session.deslikes) {
-      this.allVotes.push(deslikes);
-    }
-  }
+  ngOnInit(): void {}
 
-  checkHasVoted(_id): boolean {
-    const index = this.allVotes.findIndex(x => x === _id);
-    if(index >= 0) return true;
-    else return false;
-  }
-
-  checkVotes(_id, type: string): boolean {
-    const indexLikes = this.session.likes.findIndex(x => x === _id);
-    const indexDeslikes = this.session.deslikes.findIndex(x => x === _id);
-    if(type == 'likes'){
-      if(indexLikes >= 0){
+  checkUrl(val){
+    if(val === ''){
+      if(this.url === '/company/'+this.id){
         return true;
-      } else {
-        return false;
       }
-    }
-    if(type == 'deslikes') {
-      if(indexDeslikes >= 0){
+    } else {
+      if(this.url.includes(val)){
         return true;
-      } else {
-        return false;
       }
+      return false;
     }
-    return false;
-  }
-
-  like(_id, index): void {
-    this.rateService.setLike(_id).subscribe(r => {
-      this.rates[index].like = this.rates[index].like + 1;
-      this.allVotes.push(_id);
-      this.session.likes.push(_id);
-      console.log(this.session.likes);
-    }, e => {
-      console.log(e);
-    });
-  }
-
-  deslike(_id, index): void {
-    this.rateService.setDeslike(_id).subscribe(r => {
-      this.rates[index].deslike = this.rates[index].deslike + 1;
-      this.allVotes.push(_id);
-      this.session.deslikes.push(_id);
-    }, e => {
-      console.log(e);
-    });
-  }
-
-  getMoreRates(): void {
-    this.page = this.page + 1;
-    this.offset =  ((5 * this.page) - 5);
-    this.loadingRates = true;
-    this.rateService.getById(this.id, this.offset).subscribe(r => {
-      this.loadingRates = false;
-      for (const rate of r.rates) {
-        this.rates.push(rate);
-      }
-    }, e => {
-      this.loadingRates = false;
-    });
   }
 
 }

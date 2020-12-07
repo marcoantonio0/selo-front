@@ -1,0 +1,26 @@
+.box {
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.img-product {
+  background-color: #eee;
+  margin: auto;
+  border-radius: 5px;
+  min-width: 230px;
+  max-width: 230px;
+  display: block;
+  max-height: 230px;
+  height: 230px;
+  overflow: hidden;
+  img {
+    min-width: 230px;
+    min-height: 230px;
+  }
+}
+
+.attributes {
+  border-radius: 5px;
+  border: 1px solid #eee;
+  padding: 10px 10px 0px 10px;
+}

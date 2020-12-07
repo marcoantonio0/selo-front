@@ -1,0 +1,77 @@
+<h1>
+  Produtos
+</h1>
+<div class="box p-0">
+  <div class="box-header">
+    <div class="d-flex flex-row align-items-center justify-content-end">
+      <a mat-flat-button color="primary" [routerLink]="['/app/product/new']">
+        <mat-icon>add</mat-icon>
+        Adicionar produto
+      </a>
+    </div>
+  </div>
+  <div class="box-body">
+    <table class="table">
+      <thead>
+        <tr style="height: 61px;">
+          <th scope="col" style="width: 50px;">
+            <mat-checkbox color="primary" [formControl]="selectedAll" ></mat-checkbox>
+          </th>
+          <th scope="col" style="vertical-align: middle;">Produto</th>
+          <th scope="col" style="vertical-align: middle;">Preço de venda</th>
+          <th scope="col" style="vertical-align: middle;">Preço</th>
+          <th scope="col" style="vertical-align: middle;">Categorias</th>
+          <th scope="col" style="vertical-align: middle;">Status</th>
+          <th scope="col" style="vertical-align: middle; text-align: end;">
+            <div *ngIf="isSelected" class="d-flex flex-row align-items-center justify-content-end">
+              <button matRipple class="selecteds-action delete" color="warn" (click)="deleteSelecteds()">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products.controls | paginate: { itemsPerPage: 20, currentPage: p, totalItems: total }; let i = index ">
+          <th scope="row" >
+            <mat-checkbox color="primary" [formControl]="product.get('selected')"  ></mat-checkbox>
+          </th>
+          <td>
+            <div class="d-flex flex-row">
+              <img [src]="product.value.image_link" [alt]="product.value.title" class="product-image mr-2">
+              <span class="product-title">{{ product.value.title  }}</span>
+            </div>
+          </td>
+          <td>
+            <span class="sale_price">{{ product.value.sale_price | currency:'BRL' }}</span>
+          </td>
+          <td>
+            <span class="price">{{ product.value.price | currency:'BRL' }}</span>
+          </td>
+          <td></td>
+          <td>
+            <span class="badge badge-success" *ngIf="product.value.status">{{ product.value.status ? 'Ativo' : 'Inativo' }}</span>
+            <span class="badge badge-secondary" *ngIf="!product.value.status">{{ product.value.status ? 'Ativo' : 'Inativo' }}</span>
+          </td>
+          <td style="vertical-align: middle; text-align: end;">
+            <button mat-icon-button color="primary" [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+              <mat-icon>more_horiz</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item [routerLink]="['/app/product/'+product.value._id]">
+                <span>Editar</span>
+              </button>
+              <button mat-menu-item (click)="status(i)">
+                <span>Inativar/Ativar</span>
+              </button>
+              <button mat-menu-item (click)="delete(i)">
+                <span>Excluir</span>
+              </button>
+            </mat-menu>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <pagination-controls (pageChange)="changePage($event)" ></pagination-controls>
+  </div>
+</div>

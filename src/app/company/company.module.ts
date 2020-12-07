@@ -9,10 +9,12 @@ import { MatRippleModule } from '@angular/material/core';
 import {MatChipsModule} from '@angular/material/chips';
 import { NgxMaskModule } from 'ngx-mask';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ProductsComponent } from './products/products.component';
+import { StoreComponent } from './store/store.component';
 
 
 @NgModule({
-  declarations: [CompanyComponent],
+  declarations: [CompanyComponent, ProductsComponent, StoreComponent],
   imports: [
     CommonModule,
     CompanyRoutingModule,

@@ -1,0 +1,25 @@
+<ul class="list-products">
+  <li *ngFor="let product of products">
+    <a [href]="product.link" matRipple>
+      <picture>
+        <img [src]="product.image_link" [alt]="product.title">
+      </picture>
+      <div class="product-info">
+        <span class="product-title">
+         {{ product.title }}
+        </span>
+        <div class="product-prices mt-2">
+          <span class="price-of">
+            {{ product.sale_price | currency:'BRL' }}
+          </span>
+          <span class="price">
+          {{ product.price | currency:'BRL' }}
+          </span>
+          <span class="parcelament">
+            {{ product.installment.months }}x de {{ product.installment.amount | currency:'BRL' }}
+          </span>
+        </div>
+      </div>
+    </a>
+  </li>
+</ul>

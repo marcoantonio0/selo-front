@@ -12,6 +12,7 @@ import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MeuSiteModule } from './meu-site/meu-site.module';
 import { NgxMaskModule } from 'ngx-mask';
+import { ProductModule } from './product/product.module';
 
 
 @NgModule({
@@ -27,9 +28,11 @@ import { NgxMaskModule } from 'ngx-mask';
     SgRoutingModule,
     MatIconModule,
     LoginModule,
+    ProductModule,
     RegisterModule,
     MeuSiteModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
+    ProductModule
   ]
 })
 export class SgModule { }
