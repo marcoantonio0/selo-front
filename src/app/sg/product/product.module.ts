@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgxCurrencyModule } from "ngx-currency";
+import {MatTreeModule} from '@angular/material/tree';
 
 import { ProductRoutingModule } from './product-routing.module';
 import { ProductComponent } from './product.component';
@@ -29,6 +30,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     MatInputModule,
     NgxPaginationModule,
     MatMenuModule,
+    MatTreeModule,
     MatIconModule,
     ReactiveFormsModule,
     MatCheckboxModule,
