@@ -1,3 +1,5 @@
+import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { NgxMaskModule } from 'ngx-mask';
@@ -17,10 +19,11 @@ import { EditProductComponent } from './edit-product/edit-product.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NewComponent } from './new/new.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import {  TreeDynamicExample } from './categorytree/categorytree.component';
 
 
 @NgModule({
-  declarations: [ProductComponent, EditProductComponent, NewComponent],
+  declarations: [ProductComponent, EditProductComponent, NewComponent, TreeDynamicExample],
   imports: [
     CommonModule,
     MatButtonModule,
@@ -34,7 +37,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     MatIconModule,
     ReactiveFormsModule,
     MatCheckboxModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    NgbAlertModule,
+    MatProgressSpinnerModule
   ]
 })
 export class ProductModule { }

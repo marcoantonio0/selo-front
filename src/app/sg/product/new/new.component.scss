@@ -3,6 +3,7 @@
   border-radius: 5px;
 }
 
+
 .img-product {
   background-color: #eee;
   margin: auto;
@@ -46,29 +47,104 @@
   }
 }
 
-.sidebar {
-  min-width: 280px;
-  background-color: #fff;
-  box-shadow: -3px 0px 4px rgb(0 0 0 / 10%), -3px 0px 15px rgb(0 0 0 / 10%);
-  z-index: 2;
-  position: fixed;
-  top: 62px;
-  right: 0px;
-  bottom: 0px;
-  .sidebar-header {
-    padding: 15px 10px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    border-bottom: 1px solid #eee;
-    span {
-      font-size: 1.2rem;
-    }
-  }
+
+
+.clt, .clt ul, .clt li {
+  position: relative;
+}
+
+.clt ul {
+ list-style: none;
+ padding-left: 32px;
+}
+
+.clt li::before, .clt li::after {
+  content: "";
+  position: absolute;
+  left: -12px;
+}
+
+.clt li::before {
+  border-top: 1px solid #000;
+  top: 9px;
+  width: 8px;
+  height: 0;
+}
+
+.clt li::after {
+  border-left: 1px solid #000;
+  height: 100%;
+  width: 0px;
+  top: 2px;
+}
+
+.clt ul > li:last-child::after {
+  height: 8px;
 }
 
 .attributes {
   border-radius: 5px;
   border: 1px solid #eee;
   padding: 10px 10px 0px 10px;
+}
+
+
+.tree-category {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 10px;
+    height: 50px;
+    border-radius: 5px;
+    border: 1px solid #eee;
+    li {
+      position: relative;
+      margin-right: 30px;
+      color: #666;
+      font-weight: 500;
+      &:after {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: -20px;
+        font-family: "Material Icons";
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 15px;
+        font-weight: 600;
+        color: #7920fa;
+        content: "\e5cc";
+        font-size: 18px;
+      }
+      &:last-of-type {
+        &:after {
+          display: none
+        }
+      }
+    }
+  }
+}
+
+.loading-category {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgb(255 255 255 / 46%);
+  display: flex;
+  align-items: center;
+  z-index: 2;
+  justify-content: center;
 }

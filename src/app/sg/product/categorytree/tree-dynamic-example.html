@@ -1,0 +1,30 @@
+
+
+<div class="sidebar" [ngClass]="{'show': show}">
+  <div class="sidebar-header">
+    <button mat-icon-button (click)="close()" color="primary" class="mr-2">
+        <mat-icon class="mat-18">close</mat-icon>
+    </button>
+    <span>Categorias</span>
+  </div>
+  <div class="sidebar-box p-3">
+    <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+      <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+        <button mat-icon-button disabled></button>
+        <mat-checkbox color="primary" [checked]="checkSelect(node)" (change)="selectCategory(node)">{{node.name}}</mat-checkbox>
+      </mat-tree-node>
+      <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
+        <button mat-icon-button
+                [attr.aria-label]="'Toggle ' + node.item" matTreeNodeToggle>
+          <mat-icon class="mat-icon-rtl-mirror">
+            {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+          </mat-icon>
+        </button>
+        {{node.name}}
+        <mat-spinner *ngIf="node.isLoading"  diameter="20"
+                          mode="indeterminate"
+                          class="example-tree-progress-bar ml-2"></mat-spinner>
+      </mat-tree-node>
+    </mat-tree>
+  </div>
+</div>

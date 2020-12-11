@@ -9,6 +9,13 @@
     Novo Produto
   </h1>
 </div>
+
+<div *ngFor="let alert of alerts; let i = index" class="mt-2">
+  <ngb-alert  [type]="alert.type" (closed)="close(i)" [dismissible]="true">
+    {{ alert.error }}
+  </ngb-alert>
+</div>
+
 <div class="box">
   <div class="row mx-0 p-3" [formGroup]="productForm">
     <div class="col-12 col-xl-4 d-flex flex-column align-items-center justify-content-center">
@@ -109,6 +116,29 @@
   <hr>
   <div class="p-3">
     <h3>Categoria</h3>
+
+    <div style="position: relative;" *ngIf="treeCategories.length > 0" >
+      <div class="loading-category" *ngIf="categoryLoading">
+        <mat-spinner diameter="30" color="primary"></mat-spinner>
+      </div>
+      <div class="tree-category mb-3" *ngFor="let tree of treeCategories">
+        <ul class="category-tree-list mb-0"  >
+          <li *ngFor="let category of tree">{{category.name}}</li>
+        </ul>
+        <button mat-icon-button class="ml-3">
+            <mat-icon class="mat-18" color="primary" (click)="openCategory()">edit</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="treeCategories.length <= 0" class="d-flex flex-column align-items-center justify-content-center">
+      <h2 class="mb-0">Insira categorias</h2>
+      <p>Selecione categorias para este produto.</p>
+      <button mat-flat-button color="primary" (click)="openCategory()">
+        Adicionar categorias
+      </button>
+    </div>
+    <small style="color: var(--red)" *ngIf="productForm.get('category').invalid">* Selecione uma categoria. </small>
   </div>
   <hr>
   <div class="p-3">
@@ -147,31 +177,7 @@
   </div>
   </div>
 
-  <div class="sidebar">
-    <div class="sidebar-header">
-      <span>Categorias</span>
-    </div>
-    <div class="sidebar-box">
-      <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
-        <!-- This is the tree node template for leaf nodes -->
-        <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
-          <!-- use a disabled button to provide padding for tree leaf -->
-          <button mat-icon-button disabled></button>
-          <mat-checkbox class="checklist-leaf-node" color="primary" (change)="todoLeafItemSelectionToggle(node)">{{node.name}}</mat-checkbox>
-        </mat-tree-node>
-        <!-- This is the tree node template for expandable nodes -->
-        <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
-          <button mat-icon-button matTreeNodeToggle
-                  [attr.aria-label]="'Toggle ' + node.name">
-            <mat-icon class="mat-icon-rtl-mirror">
-              {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-            </mat-icon>
-          </button>
-          {{node.name}}
-        </mat-tree-node>
-      </mat-tree>
-    </div>
-  </div>
+  <tree-dynamic-example [show]="sidebarCategory" [InputCategories]="category" (status)="statusCategory($event)" (OutputCategories)="getCategories($event)"></tree-dynamic-example>
 
   <div class="d-flex flex-row align-items-end justify-content-end p-3">
     <button mat-flat-button color="primary" (click)="submit()">Salvar</button>

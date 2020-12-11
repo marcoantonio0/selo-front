@@ -8,6 +8,7 @@ import { api } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class CategoryService {
+  private productCategories = api.url + '/productcategory';
   private headers: HttpHeaders;
   constructor(
     private http: HttpClient,
@@ -20,6 +21,18 @@ export class CategoryService {
 
   getCategories(): Observable<any> {
     return this.http.get(api.url + '/category', { headers: this.headers });
+  }
+
+  getProductCategoryList(): Observable<any>{
+    return this.http.get(this.productCategories + '/list', { headers: this.headers });
+  }
+
+  getProductSub(id): Observable<any>{
+    return this.http.get(this.productCategories + '/parent/' + id , { headers: this.headers });
+  }
+
+  getTree(id): Observable<any>{
+    return this.http.get(this.productCategories + '/tree/' + id , { headers: this.headers });
   }
 
 }

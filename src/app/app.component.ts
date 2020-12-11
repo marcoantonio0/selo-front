@@ -11,18 +11,8 @@ import { environment } from 'src/environments/environment';
 })
 export class AppComponent {
   constructor(
-    private title: Title,
-    private sAuth: AuthenticationService,
-    @Inject(PLATFORM_ID) private platformId
+    private title: Title
     ) {
     this.title.setTitle(environment.pageTitle);
-    this.sAuth.getSession().subscribe();
-    setInterval(() => {
-      if(isPlatformBrowser(this.platformId)){
-        if(!localStorage.getItem('session')){
-          this.sAuth.getSession().subscribe();
-        }
-      }
-    }, 150);
   }
 }
