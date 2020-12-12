@@ -20,11 +20,19 @@ export class ProductService {
   }
 
   getProducts(id: string): Observable<any> {
+    return this.http.get(this.products + 'user/' + id, { headers: this.headers });
+  }
+
+  getProductById(id: string): Observable<any> {
     return this.http.get(this.products + id, { headers: this.headers });
   }
 
   getProductsSG(id: string, offset = 0): Observable<any> {
     return this.http.get(this.products + id + '/sg?offset='+offset, { headers: this.headers });
+  }
+
+  updateProduct(id: string, data: any): Observable<any> {
+    return this.http.put(this.products + id, data, { headers: this.headers });
   }
 
   create(data: any): Observable<any> {

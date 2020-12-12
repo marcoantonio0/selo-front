@@ -144,34 +144,28 @@
   <div class="p-3">
     <h3>Atributos</h3>
     <div *ngFor="let form of attributes.controls; let i = index" class="w-100 attributes mb-3">
-      <form [formGroup]="form" class="form-row mx-0">
-        <div class="col-5">
-          <p>
-            <mat-form-field class="w-100">
-              <mat-label>Nome</mat-label>
-              <input matInput formControlName="name"  required>
-              <mat-error *ngIf="form.get('name').invalid">{{ getError(form.get('name')) }}</mat-error>
-            </mat-form-field>
-          </p>
-        </div>
-        <div class="col-5">
-          <p>
-            <mat-form-field class="w-100">
-              <mat-label>Descrição</mat-label>
-              <input matInput formControlName="description"  required>
-              <mat-error *ngIf="form.get('description').invalid">{{ getError(form.get('description')) }}</mat-error>
-            </mat-form-field>
-          </p>
-        </div>
-        <div class="col-2">
-          <div class="d-flex align-items-center justify-content-center  w-100">
-            <button mat-mini-fab color="warn" (click)="removettributes(i)" *ngIf="i != 0">
-              <mat-icon>delete</mat-icon>
-            </button>
-            <button mat-mini-fab color="primary" class="ml-2"  (click)="addAttributes()" *ngIf="i == attributes.controls.length-1">
-              <mat-icon>add</mat-icon>
-            </button>
-          </div>
+      <form [formGroup]="form" class="d-flex flex-row align-items-center">
+        <p class="mr-2">
+          <mat-form-field class="w-100">
+            <mat-label>Nome</mat-label>
+            <input matInput formControlName="name"  required>
+            <mat-error *ngIf="form.get('name').invalid">{{ getError(form.get('name')) }}</mat-error>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field class="w-100">
+            <mat-label>Descrição</mat-label>
+            <input matInput formControlName="description"  required>
+            <mat-error *ngIf="form.get('description').invalid">{{ getError(form.get('description')) }}</mat-error>
+          </mat-form-field>
+        </p>
+        <div class="d-flex align-items-center justify-content-center ml-2">
+          <button mat-mini-fab color="warn" type="button" (click)="removettributes(i)" *ngIf="i != 0">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button mat-mini-fab color="primary" type="button" class="ml-2"  (click)="addAttributes()" *ngIf="i == attributes.controls.length-1">
+            <mat-icon>add</mat-icon>
+          </button>
         </div>
       </form>
   </div>
@@ -180,6 +174,11 @@
   <tree-dynamic-example [show]="sidebarCategory" [InputCategories]="category" (status)="statusCategory($event)" (OutputCategories)="getCategories($event)"></tree-dynamic-example>
 
   <div class="d-flex flex-row align-items-end justify-content-end p-3">
-    <button mat-flat-button color="primary" (click)="submit()">Salvar</button>
+    <button mat-flat-button color="primary" [disabled]="loading" (click)="submit()">
+      <div class="d-flex flex-row align-items-center justify-content-center">
+        <mat-spinner diameter="27" *ngIf="loading"></mat-spinner>
+        <span> {{loading ? 'Salvando...' : 'Salvar'}} </span>
+      </div>
+    </button>
   </div>
 </div>

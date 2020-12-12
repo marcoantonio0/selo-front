@@ -20,6 +20,7 @@ export class NewComponent implements OnInit {
   attributes = new FormArray([]);
   selectCategory;
   categorySelected = false;
+  loading = false;
   alerts: any[] = [];
   categoryLoading = false;
   timeinterval;
@@ -122,23 +123,65 @@ export class NewComponent implements OnInit {
     this.sidebarCategory = true;
   }
 
+  validation(json){
+    if(!json.title){
+      return 'O título é obrigatório.';
+    }
+
+    if(json.title && json.title > 140){
+      return 'A descrição deve contar no máximo 150 caracteres.';
+    }
+
+    if(!json.image_link) {
+      return 'O link da imagem é obrigatório.';
+    }
+
+    if(json.description && json.description.length > 5000){
+      return 'A descrição deve contar no máximo 5000 caracteres.';
+    }
+
+    if(!json.price){
+      return 'O preço é obrigatório.';
+    }
+
+    if(!json.link){
+      return 'O link do produto é obrigatório.';
+    }
+    if(json.category.length <= 0){
+      return 'A categoria do produto é obrigatória.';
+    }
+    if(!json.user){
+      return 'Insiria o ID do usuário.';
+    }
+    return true;
+  }
+
   submit(){
-    this.sProduct.create(this.productForm.value).subscribe(r => {
-      console.log(r);
-    }, e => {
-      if(e.length > 0){
-        for (const erro of e) {
-          this.alert(erro.error, 'danger', false, false);
+    if(this.attributes.invalid) return this.alert('Verifique os campos faltantes em atributos.', 'warning', false, true);
+    if(this.validation(this.productForm.value) === true){
+      this.loading = true;
+      this.sProduct.create(this.productForm.value).subscribe(r => {
+        this.loading = false;
+        console.log(r);
+      }, e => {
+        this.loading = false;
+        if(e.length > 0){
+          for (const erro of e) {
+            this.alert(erro.error, 'danger', false, false);
+          }
+        } else {
+          this.alert(e, 'danger', false, true);
         }
-      } else {
-        this.alert(e, 'danger', false, true);
-      }
-    })
+      })
+    } else {
+      this.alert(this.validation(this.productForm.value), 'warning', false, true);
+    }
   }
 
   removettributes(index){
-    this.attributes.controls.splice(index, 1);
+    this.attributes.removeAt(index);
   }
+
 
   close(index) {
     this.alerts.splice(index, 1);

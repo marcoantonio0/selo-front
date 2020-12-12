@@ -14,6 +14,8 @@ const routes: Routes = [
     { path: 'configuration',  loadChildren: () => import('./meu-site/meu-site.module').then(m => m.MeuSiteModule) },
     { path: 'payment',  loadChildren: () => import('./payment/payment.module').then(m => m.PaymentModule) },
     { path: 'product', loadChildren: () => import('./product/product.module').then(m => m.ProductModule) },
+    { path: 'rating', loadChildren: () => import('./rating/rating.module').then(m => m.RatingModule) },
+    { path: 'showcase', loadChildren: () => import('./showcase/showcase.module').then(m => m.ShowcaseModule) },
   ] },
   { path: 'login',  loadChildren: () => import('./login/login.module').then(m => m.LoginModule) },
   { path: 'register',  loadChildren: () => import('./register/register.module').then(m => m.RegisterModule) }

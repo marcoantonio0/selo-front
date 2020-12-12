@@ -20,6 +20,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NewComponent } from './new/new.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import {  TreeDynamicExample } from './categorytree/categorytree.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import {  TreeDynamicExample } from './categorytree/categorytree.component';
     MatIconModule,
     ReactiveFormsModule,
     MatCheckboxModule,
+    MatSlideToggleModule,
     MatSnackBarModule,
     NgbAlertModule,
     MatProgressSpinnerModule

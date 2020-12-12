@@ -1,1 +1,209 @@
-<p>edit-product works!</p>
+<div class="d-flex flex-row align-items-center justify-content-between mb-3">
+  <div class="d-flex flex-row align-items-center">
+    <a mat-button color="primary" class="mr-2" [routerLink]="['/app/product']">
+      <mat-icon >navigate_before</mat-icon>
+      Voltar
+    </a>
+    <h1 class="mb-0 mr-2">
+      Produto:
+    </h1>
+    <span class="productid">
+      {{ id }}
+    </span>
+  </div>
+  <div class="d-flex flex-row align-items-center">
+    <mat-slide-toggle color="primary" [formControl]="productForm.controls.status">
+      <span class="badge" style="color: #fff;" [ngClass]="{'bg-success': productForm.controls.status.value === true,  'bg-secondary': productForm.controls.status.value === false}">
+        {{ productForm.controls.status.value ? 'Ativo' : 'Inativo' }}
+      </span>
+    </mat-slide-toggle>
+  </div>
+</div>
+
+<div *ngFor="let alert of alerts; let i = index" class="mt-2">
+  <ngb-alert  [type]="alert.type" (closed)="close(i)" [dismissible]="true">
+    {{ alert.error }}
+  </ngb-alert>
+</div>
+
+<div class="box">
+  <div class="row mx-0 p-3" [formGroup]="productForm">
+    <div class="col-12 col-xl-4 d-flex flex-column align-items-center justify-content-center">
+      <picture class="img-product">
+        <img [src]="productForm.value.image_link" [alt]="productForm.value.title" *ngIf="productForm.value.image_link">
+      </picture>
+      <p>
+        <mat-form-field class="w-100">
+          <mat-label>Link da imagem</mat-label>
+          <input matInput formControlName="image_link" required>
+          <mat-error *ngIf="productForm.get('image_link').invalid">{{ getError(productForm.get('image_link')) }}</mat-error>
+        </mat-form-field>
+      </p>
+    </div>
+    <div class="col-12 col-xl-8">
+      <div >
+        <p>
+          <mat-form-field class="w-100">
+            <mat-label>Título</mat-label>
+            <input matInput placeholder="Ex. Pizza" formControlName="title" required>
+            <mat-error *ngIf="productForm.get('title').invalid">{{ getError(productForm.get('title')) }}</mat-error>
+            <mat-hint align="end">{{ productForm.value.title.length+' / 150'}}</mat-hint>
+          </mat-form-field>
+        </p>
+
+        <div class="form-row">
+          <div class="col-4">
+            <p>
+              <mat-form-field class="w-100">
+                <mat-label>Preço de venda</mat-label>
+                <input matInput placeholder="0,00" currencyMask  [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" formControlName="sale_price" >
+                 <mat-error *ngIf="productForm.get('sale_price').invalid">{{ getError(productForm.get('sale_price')) }}</mat-error>
+              </mat-form-field>
+            </p>
+          </div>
+          <div class="col-4">
+            <p>
+              <mat-form-field class="w-100">
+                <mat-label>Preço</mat-label>
+                <input matInput placeholder="0,00" currencyMask  [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" formControlName="price" required>
+                 <mat-error *ngIf="productForm.get('price').invalid">{{ getError(productForm.get('price')) }}</mat-error>
+              </mat-form-field>
+            </p>
+          </div>
+          <div class="col-4">
+            <p>
+              <mat-form-field class="w-100">
+                <mat-label>Desconto</mat-label>
+                <input matInput placeholder="10" formControlName="discount"  style="text-align: end;">
+                <mat-hint matSuffix>%</mat-hint>
+                 <mat-error *ngIf="productForm.get('discount').invalid">{{ getError(productForm.get('discount')) }}</mat-error>
+              </mat-form-field>
+            </p>
+          </div>
+
+          <div class="w-100">
+              <mat-form-field class="w-100">
+                <mat-label>EAN</mat-label>
+                <input matInput placeholder="Ex. Pizza" formControlName="tel" >
+                <mat-error *ngIf="productForm.get('ean').invalid">{{ getError(productForm.get('ean')) }}</mat-error>
+              </mat-form-field>
+          </div>
+          <div class="w-100 mb-2">
+              <mat-form-field class="w-100">
+                <mat-label>SKU</mat-label>
+                <input matInput placeholder="Ex. Pizza" formControlName="sku" >
+                <mat-error *ngIf="productForm.get('sku').invalid">{{ getError(productForm.get('sku')) }}</mat-error>
+              </mat-form-field>
+          </div>
+
+        </div>
+        <h3>Parcelas</h3>
+        <div class="row mx-0" formGroupName="installment">
+          <div class="col-6 pl-0">
+            <p>
+              <mat-form-field class="w-100">
+                <mat-label>Parcelas</mat-label>
+                <input matInput placeholder="5"  formControlName="months"  >
+                <mat-hint matSuffix>x</mat-hint>
+                 <mat-error *ngIf="productForm.get('installment').get('months').invalid">{{ getError(productForm.get('installment').get('months')) }}</mat-error>
+              </mat-form-field>
+            </p>
+          </div>
+          <div class="col-6 pl-0">
+            <p>
+              <mat-form-field class="w-100">
+                <mat-label>Valor</mat-label>
+                <input matInput placeholder="0,00" currencyMask  [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" formControlName="amount" >
+                <mat-error *ngIf="productForm.get('installment').get('amount').invalid">{{ getError(productForm.get('installment').get('amount')) }}</mat-error>
+              </mat-form-field>
+            </p>
+          </div>
+        </div>
+
+        <p>
+          <mat-form-field class="w-100">
+            <mat-label>Link</mat-label>
+            <input matInput placeholder="https://sualoja.com.br/product-link" formControlName="link" required>
+             <mat-error *ngIf="productForm.get('link').invalid">{{ getError(productForm.get('link')) }}</mat-error>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field class="w-100">
+            <mat-label>Descrição</mat-label>
+            <textarea matInput cols="6" rows="6" formControlName="description" required></textarea>
+             <mat-error *ngIf="productForm.get('description').invalid">{{ getError(productForm.get('description')) }}</mat-error>
+            <mat-hint align="end">{{ productForm.value.description.length+' / 5000'}}</mat-hint>
+          </mat-form-field>
+        </p>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="p-3">
+    <h3>Categoria</h3>
+
+    <div style="position: relative;" *ngIf="treeCategories.length > 0" >
+      <div class="loading-category" *ngIf="categoryLoading">
+        <mat-spinner diameter="30" color="primary"></mat-spinner>
+      </div>
+      <div class="tree-category mb-3" *ngFor="let tree of treeCategories">
+        <ul class="category-tree-list mb-0"  >
+          <li *ngFor="let category of tree">{{category.name}}</li>
+        </ul>
+        <button mat-icon-button class="ml-3">
+            <mat-icon class="mat-18" color="primary" (click)="openCategory()">edit</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="treeCategories.length <= 0" class="d-flex flex-column align-items-center justify-content-center">
+      <h2 class="mb-0">Insira categorias</h2>
+      <p>Selecione categorias para este produto.</p>
+      <button mat-flat-button color="primary" (click)="openCategory()">
+        Adicionar categorias
+      </button>
+    </div>
+    <small style="color: var(--red)" *ngIf="productForm.get('category').invalid">* Selecione uma categoria. </small>
+  </div>
+  <hr>
+  <div class="p-3">
+    <h3>Atributos</h3>
+    <div *ngFor="let form of attributes.controls; let i = index" class="w-100 attributes mb-3">
+      <form [formGroup]="form" class="d-flex flex-row align-items-center">
+        <p class="mr-2">
+          <mat-form-field class="w-100">
+            <mat-label>Nome</mat-label>
+            <input matInput formControlName="name"  required>
+            <mat-error *ngIf="form.get('name').invalid">{{ getError(form.get('name')) }}</mat-error>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field class="w-100">
+            <mat-label>Descrição</mat-label>
+            <input matInput formControlName="description"  required>
+            <mat-error *ngIf="form.get('description').invalid">{{ getError(form.get('description')) }}</mat-error>
+          </mat-form-field>
+        </p>
+        <div class="d-flex align-items-center justify-content-center ml-2">
+          <button mat-mini-fab color="warn" type="button" (click)="removettributes(i)" *ngIf="i != 0">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button mat-mini-fab color="primary" type="button" class="ml-2"  (click)="addAttributes()" *ngIf="i == attributes.controls.length-1">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+      </form>
+  </div>
+  </div>
+
+  <tree-dynamic-example [show]="sidebarCategory" [InputCategories]="category" (status)="statusCategory($event)" (OutputCategories)="getCategories($event)"></tree-dynamic-example>
+
+  <div class="d-flex flex-row align-items-end justify-content-end p-3">
+    <button mat-flat-button color="primary" [disabled]="loading" (click)="submit()">
+      <div class="d-flex flex-row align-items-center justify-content-center">
+        <mat-spinner diameter="27" *ngIf="loading"></mat-spinner>
+        <span> {{loading ? 'Salvando...' : 'Salvar'}} </span>
+      </div>
+    </button>
+  </div>
+</div>

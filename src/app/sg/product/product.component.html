@@ -20,7 +20,6 @@
           <th scope="col" style="vertical-align: middle;">Produto</th>
           <th scope="col" style="vertical-align: middle;">Preço de venda</th>
           <th scope="col" style="vertical-align: middle;">Preço</th>
-          <th scope="col" style="vertical-align: middle;">Categorias</th>
           <th scope="col" style="vertical-align: middle;">Status</th>
           <th scope="col" style="vertical-align: middle; text-align: end;">
             <div *ngIf="isSelected" class="d-flex flex-row align-items-center justify-content-end">
@@ -48,7 +47,6 @@
           <td>
             <span class="price">{{ product.value.price | currency:'BRL' }}</span>
           </td>
-          <td></td>
           <td>
             <span class="badge badge-success" *ngIf="product.value.status">{{ product.value.status ? 'Ativo' : 'Inativo' }}</span>
             <span class="badge badge-secondary" *ngIf="!product.value.status">{{ product.value.status ? 'Ativo' : 'Inativo' }}</span>
@@ -58,7 +56,7 @@
               <mat-icon>more_horiz</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
-              <button mat-menu-item [routerLink]="['/app/product/'+product.value._id]">
+              <button mat-menu-item [routerLink]="['/app/product/edit/'+product.value._id]">
                 <span>Editar</span>
               </button>
               <button mat-menu-item (click)="status(i)">
