@@ -293,3 +293,119 @@
   color: #c7c3c3;
   font-weight: 400;
 }
+
+.filter {
+  &.active {
+    .filter-wrapper {
+      visibility: visible;
+    }
+    .filter-overlay {
+      visibility: visible;
+    }
+    .filter-button {
+      z-index:3;
+      &:before {
+        content: "keyboard_arrow_up";
+      }
+    }
+
+  }
+
+  .filter-overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 2;
+    height: 100vh;
+    width: 100vw;
+    visibility: hidden;
+  }
+  .filter-button {
+    appearance: none;
+    min-height: 38px;
+    border: 1px solid #d4d2d2;
+    border-radius: 5rem;
+    padding: 5px 25px 5px 8px;
+    font-size: 14px;
+    text-align: start;
+    position: relative;
+    min-width: 80px;
+    background-color: #fff;
+    z-index:1;
+    outline: none;
+    &:before {
+      font-family: 'Material Icons';
+      content: "keyboard_arrow_down";
+      display: flex;
+      align-items: center;
+      width: 25px;
+      justify-content: center;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+    }
+    &.selected {
+      color: #7720fa;
+      border-color: #7720fa;
+      background-color: #f8f3ff;
+    }
+  }
+  .filter-wrapper {
+    position: relative;
+    z-index: 3;
+    visibility: hidden;
+    .filter-box {
+      width: 100%;
+      width: auto;
+      position: absolute;
+      margin-top: 5px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 1px 3px rgb(0 0 0 / 36%);
+    }
+  }
+}
+
+.mat-chip.mat-standard-chip {
+  background-color: #e0e0e0;
+  color: rgba(0, 0, 0, .87);
+}
+
+.mat-standard-chip {
+  min-height: 26px;
+  color: #fff !important;
+  background-color: #7720fa !important;
+}
+
+
+.mat-chip.mat-standard-chip .mat-chip-remove {
+  color: rgba(255, 255, 255, 0.87);
+  opacity: .4;
+}
+
+
+.list-comma {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+  margin: 0;
+  flex-wrap: wrap;
+  justify-content: start;
+  li {
+    padding-right: 7px;
+    &:after {
+      margin-right: 2px;
+      content: ",";
+      position: absolute;
+    }
+    &:last-of-type{
+      &:after {
+        display: none;
+      }
+    }
+  }
+}

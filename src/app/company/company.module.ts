@@ -1,3 +1,6 @@
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { NgModule } from '@angular/core';
@@ -22,7 +25,10 @@ import { StoreComponent } from './store/store.component';
     MatProgressSpinnerModule,
     MatRippleModule,
     MatChipsModule,
+    ReactiveFormsModule,
     MatButtonModule,
+    MatCheckboxModule,
+    MatRadioModule,
     NgxMaskModule.forRoot()
   ]
 })
