@@ -1,3 +1,4 @@
+import { Title } from '@angular/platform-browser';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormArray, FormBuilder, FormControl } from '@angular/forms';
 import { AuthenticationService } from './../../_services/authentication.service';
@@ -19,11 +20,13 @@ export class ProductComponent implements OnInit {
   public selectedAll = new FormControl(false);
   public total = 0;
   constructor(
+    private title: Title,
     private sProduct: ProductService,
     private sAuth: AuthenticationService,
     private fb: FormBuilder,
     private snack: MatSnackBar
   ) {
+    this.title.setTitle('Produtos');
     this.checkAll();
     this.products.valueChanges.subscribe(value => {
       this.checkSelected();

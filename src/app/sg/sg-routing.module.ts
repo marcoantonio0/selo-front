@@ -16,6 +16,7 @@ const routes: Routes = [
     { path: 'product', loadChildren: () => import('./product/product.module').then(m => m.ProductModule) },
     { path: 'rating', loadChildren: () => import('./rating/rating.module').then(m => m.RatingModule) },
     { path: 'showcase', loadChildren: () => import('./showcase/showcase.module').then(m => m.ShowcaseModule) },
+    { path: 'selo', loadChildren: () => import('./selo/selo.module').then(m => m.SeloModule) },
   ] },
   { path: 'login',  loadChildren: () => import('./login/login.module').then(m => m.LoginModule) },
   { path: 'register',  loadChildren: () => import('./register/register.module').then(m => m.RegisterModule) }

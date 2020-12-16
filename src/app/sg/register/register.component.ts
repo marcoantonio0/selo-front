@@ -1,3 +1,4 @@
+import { AuthenticationService } from './../../_services/authentication.service';
 import { UserService } from 'src/app/_services/user.service';
 import { CustomerService } from './../../_services/customer.service';
 import { Title } from '@angular/platform-browser';
@@ -21,12 +22,15 @@ export class RegisterComponent implements OnInit {
     private customerService: CustomerService,
     private userService: UserService,
     private snack: MatSnackBar,
-    private auth: AuthenticationCustomerService,
+    private auth: AuthenticationService,
     private route: Router,
     private title: Title
   ) {
     this.title.setTitle(`Cadastre-se | ${environment.pageTitle}`);
     this.getCep();
+    if(this.auth.currentUserValue){
+      this.route.navigate(['/app']);
+    }
   }
   @ViewChild('stepper') stepper: MatStepper;
   timeinterval: any;
@@ -177,7 +181,7 @@ export class RegisterComponent implements OnInit {
   submit(): void {
     if (this.validateForms() === true){
       this.disabledAll();
-      this.customerService.create(this.getJson()).subscribe(r => {
+      this.userService.create(this.getJson()).subscribe(r => {
         this.enableAll();
         this.alert(r.message, 'success', false, true);
         setTimeout(() => {

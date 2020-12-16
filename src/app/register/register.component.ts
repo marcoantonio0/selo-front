@@ -1,3 +1,4 @@
+import { AuthenticationCustomerService } from './../_services/authentication-customer.service';
 import { CustomerService } from './../_services/customer.service';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
@@ -31,13 +32,16 @@ export class RegisterComponent implements OnInit {
   public steps = [];
   constructor(
     private snack: MatSnackBar,
-    private auth: AuthenticationService,
+    private auth: AuthenticationCustomerService,
     private route: Router,
     private sCustomer: CustomerService,
     private title: Title
   ) {
     this.title.setTitle(`Cadastre-se | ${environment.pageTitle}`);
     this.cpfForm.controls['gender'].setValue('M');
+    if(this.auth.currentUserValue){
+      this.route.navigate(['/']);
+    }
   }
 
   currentSteps(): any{

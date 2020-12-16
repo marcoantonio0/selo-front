@@ -18,6 +18,12 @@
         Painel
       </a>
     </li>
+    <li class="sb-item" [ngClass]="{ 'active': checkUrl('selo') }">
+      <a class="sb-link" [routerLink]="['/app/selo']"  >
+        <mat-icon >verified</mat-icon>
+        Selo
+      </a>
+    </li>
     <li class="sb-item" [ngClass]="{ 'active': checkUrl('product') }">
       <a class="sb-link" [routerLink]="['/app/product']"  >
         <mat-icon >shopping_bag</mat-icon>

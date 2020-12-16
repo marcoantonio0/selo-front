@@ -71,6 +71,22 @@
             </p>
           </div>
 
+
+          <div class="w-100">
+            <mat-form-field class="w-100">
+              <mat-label>EAN</mat-label>
+              <input matInput placeholder="Ex. Pizza" formControlName="tel" >
+              <mat-error *ngIf="productForm.get('ean').invalid">{{ getError(productForm.get('ean')) }}</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="w-100 mb-2">
+            <mat-form-field class="w-100">
+              <mat-label>SKU</mat-label>
+              <input matInput placeholder="Ex. Pizza" formControlName="sku" >
+              <mat-error *ngIf="productForm.get('sku').invalid">{{ getError(productForm.get('sku')) }}</mat-error>
+            </mat-form-field>
+        </div>
+
         </div>
         <h3>Parcelas</h3>
         <div class="row mx-0" formGroupName="installment">

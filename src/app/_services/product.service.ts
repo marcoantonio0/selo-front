@@ -15,6 +15,7 @@ export class ProductService {
     private sAuth: AuthenticationService
   ) {
     this.headers = new HttpHeaders({
+      'Content-Type': 'application/json',
       Authorization: 'Bearer ' + this.sAuth.currentUserValue?.access_token
     });
   }
@@ -52,7 +53,7 @@ export class ProductService {
   }
 
   deleteMany(ids: string[]): Observable<any> {
-    return this.http.put(this.products + 'delete', { id: ids }, { headers: this.headers });
+    return this.http.put(this.products + 'delete/many', { id: ids }, { headers: this.headers });
   }
 
 }

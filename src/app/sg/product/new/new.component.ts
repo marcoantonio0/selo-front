@@ -38,6 +38,8 @@ export class NewComponent implements OnInit {
     attributes: this.attributes,
     category: new FormControl('', Validators.required),
     user: new FormControl(''),
+    ean: new FormControl(''),
+    sku: new FormControl(''),
     installment: new FormGroup({
       months: new FormControl(''),
       amount: new FormControl('')

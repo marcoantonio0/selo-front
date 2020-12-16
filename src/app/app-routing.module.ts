@@ -1,4 +1,3 @@
-import { AuthGuard } from './auth/auth.guard';
 import { Error404Component } from './error404/error404.component';
 import { LayoutComponent } from './layout/layout.component';
 import { NgModule } from '@angular/core';

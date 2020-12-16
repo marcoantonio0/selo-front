@@ -9,7 +9,14 @@
         <li class="rate-item" *ngFor="let rate of rates; let i = index">
           <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex flex-column">
+             <div class="d-flex flex-row align-items-center justify-content-between">
               <span class="user-name mb-0">{{ rate?.name ? rate?.name : 'Anônimo' }} </span>
+              <span class="badge ml-3" [ngClass]="{'badge-primary': rate.type === 'praise', 'badge-secondary': rate.type === 'suggestion', 'badge-warning': rate.type === 'claim'}">
+                <span *ngIf="rate.type === 'suggestion'">Sugestão</span>
+                <span *ngIf="rate.type === 'claim'">Reclamação</span>
+                <span *ngIf="rate.type === 'praise'">Avaliação</span>
+              </span>
+             </div>
               <div class="d-flex flex-row align-items-center" [innerHTML]="rateService.startsHTML(rate?.rate)"></div>
             </div>
             <span class="rate-time">{{ rate?.createdAt | date: 'dd/MM/yyyy' }}</span>
