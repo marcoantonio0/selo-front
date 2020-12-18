@@ -11,7 +11,7 @@ import { UserService } from 'src/app/_services/user.service';
 })
 export class StoreComponent implements OnInit {
   public company;
-  public rates;
+  public rates = [];
   private id;
   private offset = 0;
   private limit = 5;
@@ -23,30 +23,36 @@ export class StoreComponent implements OnInit {
   public loadingRates = false;
   public homeCompany;
   public allVotes = [];
+  public star = 0;
+  public order = 0;
+  public isRateLoading = true;
+  public type = [];
+  private offsetChange = 0;
   public stars = [1, 2, 3, 4, 5];
   public session;
   typeArray = new FormArray([]);
   public filter = new FormGroup({
     type:  this.typeArray,
-    star: new FormControl(''),
-    voted: new FormControl(0)
+    offset: new FormControl(0),
+    star: new FormControl(0),
+    order: new FormControl(0)
   });
   selectedTypes = [];
   public types = [
     {
-      type: 1,
+      type: 'praise',
       name: 'Avaliação'
     },
     {
-      type: 2,
+      type: 'claim',
       name: 'Reclamação'
     },
     {
-      type: 3,
+      type: 'suggestion',
       name: 'Sugestão'
     }
   ];
-  public voteds = [
+  public orders = [
     {
       type: 0,
       name: 'Recentes'
@@ -70,6 +76,7 @@ export class StoreComponent implements OnInit {
     public sRate: RateService,
     @Inject(PLATFORM_ID) private platformId,
   ) {
+    this.filterChange();
     this.typeChanges();
   }
 
@@ -78,6 +85,7 @@ export class StoreComponent implements OnInit {
     this.route.params.subscribe(params => {
       if(params.id){
         this.userService.getStore(params.id).subscribe(r => {
+          this.isRateLoading = false;
           this.company = r;
           this.id = r.id;
           this.rateService.getById(this.id).subscribe(r => {
@@ -87,6 +95,7 @@ export class StoreComponent implements OnInit {
             this.total = r.total;
           });
         }, e => {
+          this.isRateLoading = false;
           this.notFound = true;
         });
       }
@@ -95,8 +104,55 @@ export class StoreComponent implements OnInit {
 
   filterChange(){
     this.filter.valueChanges.subscribe(value => {
-
+      let isChange = false;
+      if(value.offset != this.offsetChange){
+        this.loadingRates = true;
+        this.offsetChange = value.offset;
+      }
+      if(value.star != this.star  || value.type.length != this.type.length || value.order != this.order){
+        isChange = true;
+        this.offset = 0;
+        this.offsetChange = 0;
+        this.page = 1;
+        this.star = value.star;
+        this.type = value.type.join('-');
+        this.order = value.order;
+        this.isRateLoading = true;
+      }
+      this.rateService.getById(
+        this.id,
+        this.offset,
+        this.star,
+        this.type,
+        value.order
+      ).subscribe(r => {
+        if(isChange){
+          this.isRateLoading = false;
+          this.rates = [];
+          this.loadingRates = false;
+          for (const rate of r.rates) {
+            this.rates.push(rate);
+          }
+        } else {
+          if(this.loadingRates){
+            this.loadingRates = false;
+            for (const rate of r.rates) {
+              this.rates.push(rate);
+            }
+          }
+        }
+        this.setAllVotes();
+        this.total = r.total;
+      }, e => {
+        this.isRateLoading = false;
+        this.notFound = true;
+      });
     })
+  }
+
+  clearStar(){
+    this.filter.controls.star.setValue(0);
+    this.star = 0;
   }
 
   typeChanges(){
@@ -111,8 +167,8 @@ export class StoreComponent implements OnInit {
     })
   }
 
-  votedName(value){
-    return this.voteds[this.voteds.findIndex(x => x.type == this.filter.value.voted)];
+  orderName(){
+    return this.orders[this.orders.findIndex(x => x.type == this.filter.value.order)];
   }
 
   toggleValueType(value){
@@ -148,7 +204,7 @@ export class StoreComponent implements OnInit {
         this.starFilter = false;
       }
     }
-    if(type == 'voted'){
+    if(type == 'order'){
       if(!this.votedFilter){
         this.votedFilter = true;
       } else {
@@ -228,14 +284,6 @@ export class StoreComponent implements OnInit {
   getMoreRates(): void {
     this.page = this.page + 1;
     this.offset =  ((5 * this.page) - 5);
-    this.loadingRates = true;
-    this.rateService.getById(this.id, this.offset).subscribe(r => {
-      this.loadingRates = false;
-      for (const rate of r.rates) {
-        this.rates.push(rate);
-      }
-    }, e => {
-      this.loadingRates = false;
-    });
+    this.filter.get('offset').setValue(this.offset);
   }
 }

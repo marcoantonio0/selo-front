@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { NgxContentLoadingModule } from 'ngx-content-loading';
 import { CompanyRoutingModule } from './company-routing.module';
 import { CompanyComponent } from './company.component';
 import { MatRippleModule } from '@angular/material/core';
@@ -28,6 +28,7 @@ import { StoreComponent } from './store/store.component';
     ReactiveFormsModule,
     MatButtonModule,
     MatCheckboxModule,
+    NgxContentLoadingModule,
     MatRadioModule,
     NgxMaskModule.forRoot()
   ]

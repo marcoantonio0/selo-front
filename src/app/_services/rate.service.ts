@@ -15,8 +15,17 @@ export class RateService {
     @Inject(PLATFORM_ID) private platformId
     ) { }
 
-  public getById(id: number, offset?: number): Observable<any> {
-    return this.http.get(`${api.url}/rate/${id}${offset ? '?offset=' + offset : ''}`);
+  public getById(id: number, offset?: number, star?: number, type?: string[], order?: number): Observable<any> {
+    const qOffset = offset ? 'offset=' + offset : 'offset=0';
+    const qStar = star ? 'star=' + star : '';
+    const qType = type ? 'type=' + type : '';
+    const qOrder = order ? 'order=' + order : 'order=0';
+    const url = `
+    ?${qOffset ? qOffset : '' }${qType ? '&' : ''}
+     ${qType ? qType : ''}${qOrder ? '&' : ''}
+     ${qOrder ? qOrder : ''}${qStar ? '&' : ''}
+     ${qStar ? qStar : '' }`;
+    return this.http.get(`${api.url}/rate/${id}${url.replace(/\s/g,'')}`);
   }
 
   public create(data: any): Observable<any> {

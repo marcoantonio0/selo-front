@@ -22,4 +22,8 @@
       </div>
     </a>
   </li>
+  <div class="d-flex flex-column align-items-center justify-content-center w-100" style="min-height: 120px;" *ngIf="!loading && products.length <= 0">
+    <h1>Nenhum produto foi encontrado :(</h1>
+    <p>Talvez esta loja não tenha produtos cadastrados.</p>
+  </div>
 </ul>

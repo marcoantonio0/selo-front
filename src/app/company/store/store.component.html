@@ -3,9 +3,9 @@
     <section class="company-rates">
       <div class="d-flex flex-row align-items-center">
         <h1 class="mb-0 mr-2">Avaliações</h1>
-        <span>({{total}} avaliações)</span>
+        <span *ngIf="rates?.length > 0">({{total}} avaliações)</span>
       </div>
-      <div class="d-flex flex-row align-items-center flex-wrap mt-2 mb-3">
+      <div class="d-flex flex-row align-items-center flex-wrap mt-2 mb-3" >
         <span style="font-weight: 500; color: #333;" class="mr-2">Filtrar</span>
         <div class="filter m-2" [ngClass]="{ 'active': typeFilter }">
           <button class="filter-button" (click)="toggleType('type')" [ngClass]="{'selected': typeArray.length > 0 }">
@@ -33,7 +33,7 @@
                 <span   [innerHTML]="sRate.startsHTML(filter.value.star)"></span>
               </div>
             </button>
-            <button *ngIf="filter.value.star" color="primary" style="outline: 0;" class="ml-2" mat-icon-button (click)="filter.controls.star.setValue()" >
+            <button *ngIf="filter.value.star" color="primary" style="outline: 0;" class="ml-2" mat-icon-button (click)="clearStar()" >
               <mat-icon class="mat-18" style="font-size: 18px;">close</mat-icon>
           </button>
           </div>
@@ -51,22 +51,42 @@
           <div class="filter-overlay" (click)="closeType('star')"></div>
         </div>
         <div class="filter m-2" [ngClass]="{ 'active': votedFilter }">
-          <button class="filter-button" (click)="toggleType('voted')" [ngClass]="{'selected': votedName().type != 0 }">
+          <button class="filter-button" (click)="toggleType('order')" [ngClass]="{'selected': orderName().type != 0 }">
             <div class="d-flex flex-row align-items-center">
-              <span class="d-block mr-1" style="font-weight: 600; color: #333;">Ordenar por:</span> {{ votedName().name }}
+              <span class="d-block mr-1" style="font-weight: 600; color: #333;">Ordenar por:</span> {{ orderName().name }}
             </div>
           </button>
           <div class="filter-wrapper">
             <div class="filter-box p-2">
               <div class="d-flex flex-column">
-                <mat-radio-group [formControl]="filter.controls.voted">
-                  <mat-radio-button [value]="voted.type" *ngFor="let voted of voteds" color="primary">{{ voted.name }}</mat-radio-button>
+                <mat-radio-group [formControl]="filter.controls.order">
+                  <mat-radio-button [value]="order.type" *ngFor="let order of orders" color="primary">{{ order.name }}</mat-radio-button>
                 </mat-radio-group>
               </div>
             </div>
           </div>
           <div class="filter-overlay" (click)="closeType('voted')"></div>
         </div>
+      </div>
+      <div *ngIf="isRateLoading">
+        <ngx-content-loading
+        [speed]="'1500ms'"
+        [width]="900"
+        [height]="100">
+            <svg:g ngx-rect width="150" height="8" y="10" x="0" rx="5" ry="5"></svg:g>
+            <svg:g ngx-rect width="90" height="8" y="40" x="0" rx="5" ry="5"></svg:g>
+            <svg:g ngx-rect width="250" height="12" y="70" x="0" rx="5" ry="5"></svg:g>
+            <svg:g ngx-rect width="120" height="12" y="100" x="0" rx="5" ry="5"></svg:g>
+      </ngx-content-loading>
+      <ngx-content-loading
+      [speed]="'1500ms'"
+      [width]="900"
+      [height]="100">
+          <svg:g ngx-rect width="150" height="8" y="10" x="0" rx="5" ry="5"></svg:g>
+          <svg:g ngx-rect width="90" height="8" y="40" x="0" rx="5" ry="5"></svg:g>
+          <svg:g ngx-rect width="315" height="12" y="70" x="0" rx="5" ry="5"></svg:g>
+          <svg:g ngx-rect width="120" height="12" y="100" x="0" rx="5" ry="5"></svg:g>
+      </ngx-content-loading>
       </div>
       <ul class="list-rates" *ngIf="rates?.length > 0">
         <li class="rate-item" *ngFor="let rate of rates; let i = index">
